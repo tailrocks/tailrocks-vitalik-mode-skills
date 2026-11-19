@@ -3,8 +3,8 @@
 ## Source
 
 - Review comment or finding:
-- Pull request:
-- File and source revision:
+- Pull request, when applicable:
+- Artifact, file, or source revision, when applicable:
 - Related goal or parent issue:
 
 ## Finding and impact

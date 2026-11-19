@@ -1,13 +1,17 @@
 # Engineering tradeoffs
 
-Vitalik mode chooses the shortest credible path to the accepted outcome.
-That path includes integration, useful delivery, and required recovery.
-Administrator merges and temporary red main remain available choices.
-The research improves the evidence used to choose them.
+Vitalik mode brings the goal's valuable results into use sooner.
+Time to market and time to delivery are its primary metrics.
+The plan prioritizes valuable results and includes required recovery.
+The generic mode selects practices from the goal and observed conditions.
+Administrator merges and temporary red main remain available delivery tactics.
 
 ## Contents
 
-- [Findings](#findings)
+- [Generic mode design](#generic-mode-design)
+- [Comparison with Poteto](#comparison-with-poteto)
+- [Additional engineering tactics](#additional-engineering-tactics)
+- [Earlier delivery findings](#earlier-delivery-findings)
 - [Established tactics](#established-tactics)
 - [Time comparison](#time-comparison)
 - [Effects and recovery](#effects-and-recovery)
@@ -15,7 +19,133 @@ The research improves the evidence used to choose them.
 - [Implementation](#implementation)
 - [Research limits](#research-limits)
 
-## Findings
+## Generic mode design
+
+The 2026-11-20 revision separates the decision policy from workflow details.
+The previous core emphasized integration and CI despite its broader goal.
+The planner prompt also assumed red-main recovery for every task.
+An existing plan appeared optional on first activation.
+
+Activation now reassesses the whole remaining plan.
+The planner receives every step, completed results, current operations, and
+effects already created.
+It explains which steps to keep, remove, replace, combine, reorder, or run in
+parallel.
+It can retain a plan that already best serves the goal's delivery priorities.
+
+The main skill defines the objective, activation, delegation, adaptation,
+restoration, and completion.
+It selects practice references by the decisions they can improve.
+The main agent retains its model and owns execution.
+The strong planning subagent returns a plan and stops.
+
+The design makes three distinctions explicit:
+
+- A condition that must hold throughout differs from a condition required at
+  completion.
+- Temporary incompleteness differs from required work abandoned into a backlog.
+- Useful delivery differs from an intermediate artifact or a completed recovery.
+
+The last distinction can change the selected route.
+In one supplied scenario, a route delivered the usable capability at hour two
+and restored internal stability at hour eight.
+Another route delivered and restored at hour six.
+With early access valued and restoration due by hour ten, the planner selected
+the first route.
+When the restoration deadline changed to hour seven, it selected the second.
+An inaccessible preview did not count as useful delivery in a third variant.
+These are hypothetical planning cases, not measured delivery results.
+
+For example, a complete legacy replacement can tolerate intermediate development
+failures within its authority.
+Its final state still requires the requested behavior and removal of old paths.
+An issue for missing required removal cannot complete that goal.
+A goal that explicitly retains a fallback has a different completion boundary.
+
+The same distinction applies to timing conventions.
+A weekday alone does not establish the cost of a release.
+Actual exposure, available observation, and recovery capacity affect the
+decision.
+Binding platform controls and explicit task limits still apply.
+
+The runtime includes seven optional practices and three control references.
+The practices cover plan redesign, decision tactics, migration, performance,
+incidents, delivery, and review findings.
+The control references cover state, delegation, and host differences.
+A direct fix can need no specialized practice.
+
+## Comparison with Poteto
+
+The closest contextual match for the requested Potato skill is Lauren Tan's
+[poteto-mode](https://github.com/cursor/plugins/blob/e58dd043600587dbaf58ba315e7f2b38373eeb43/pstack/skills/poteto-mode/SKILL.md).
+The comparison uses upstream revision
+`e58dd043600587dbaf58ba315e7f2b38373eeb43`.
+The spelling differs from Potato, so this identification remains an explicit
+interpretation.
+
+Poteto already routes work through principles and task playbooks.
+Its principles challenge failed premises, remove unnecessary work, and favor
+verified outcomes.
+Its
+[outcome-oriented execution principle](https://github.com/cursor/plugins/blob/e58dd043600587dbaf58ba315e7f2b38373eeb43/pstack/skills/principle-outcome-oriented-execution/SKILL.md)
+permits planned intermediate breakage during rewrites and migrations.
+It requires scoped, reversible change and verification at completion.
+This is meaningful overlap with Vitalik mode.
+
+Poteto's
+[multi-phase planning playbook](https://github.com/cursor/plugins/blob/e58dd043600587dbaf58ba315e7f2b38373eeb43/pstack/skills/poteto-mode/playbooks/multi-phase-plan.md)
+produces a plan and waits for a separate execution instruction.
+Vitalik mode binds activation to the current goal and its existing authority.
+It requires strong-model reassessment of the whole remaining plan, then
+execution by the primary agent.
+Its state persists through that goal and deactivates at completion.
+
+The revision adopts useful mechanisms without importing another package's
+runtime dependencies or default model configuration.
+It conditions extra tooling, prototypes, and reviews on their expected decision
+value and delay.
+It keeps required restoration in the current goal and useful deferrals in
+active tracking.
+
+## Additional engineering tactics
+
+These tactics extend the earlier delivery research to other engineering work.
+They supply conditional choices rather than mandatory ceremony.
+
+| Tactic | Decision improved | Limit |
+| --- | --- | --- |
+| YAGNI and subtraction | Remove features, layers, or tools justified only by assumed future needs. | Preserve the requested outcome and actual dependencies. |
+| Constraint analysis | Focus work on the resource or dependency that limits the whole result. | Reassess the constraint after an intervention changes it. |
+| Thin integrated slices | Obtain useful evidence about uncertain feature boundaries early. | Keep the remaining required behavior in the active plan. |
+| Active benchmarking | Establish which work the measured number actually represents. | Use representative inputs and final operating conditions. |
+| Amdahl's bound | Estimate whether changing one sequential component could achieve the total target. | Queueing, overlap, workload changes, and percentile aggregation require separate analysis. |
+| Transitional architecture | Compare direct replacement with useful temporary coexistence. | Count construction and removal, including the final legacy dependency. |
+
+[Fowler's YAGNI explanation](https://martinfowler.com/bliki/Yagni.html)
+describes the cost of speculative capability.
+[Goldratt Research Labs](https://www.goldrattresearchlabs.com/introduction-to-toc/)
+describes focusing on a constraint and reassessing it after improvement.
+[Basecamp's integrated slice](https://basecamp.com/shapeup/3.2-chapter-11)
+provides early evidence from working behavior.
+
+[Gregg's active benchmarking](https://www.brendangregg.com/activebenchmarking.html)
+examines what limits a benchmark and whether its result supports the claimed
+conclusion.
+[Amdahl's original paper](https://www.cs.cmu.edu/~18742/papers/Amdahl1967.pdf)
+explains why unchanged sequential work limits total improvement.
+For a fixed sequential request, removing a 20-millisecond span from 200
+milliseconds leaves 180 milliseconds.
+That observation can reject a parser-only route to a 100-millisecond target.
+It does not establish the benefit of an unmeasured alternative.
+
+[Cartwright, Horn, and Lewis](https://martinfowler.com/articles/patterns-legacy-displacement/transitional-architecture.html)
+describe temporary architecture whose removal forms part of legacy
+displacement.
+The migration reference also compares direct cutover, branch by abstraction,
+and Strangler Fig.
+The goal's actual dependency structure determines which route earns its cost.
+
+## Earlier delivery findings
 
 The initial skill already addressed authority, strong-model planning, mode
 continuity, and tracked review deferrals.
@@ -243,6 +373,10 @@ They are not instructions to perform live operations.
 | Resource | Responsibility |
 | --- | --- |
 | [Skill](../skills/vitalik-mode/SKILL.md) | Command state, primary workflow, authority, and completion. |
+| [Plan redesign](../skills/vitalik-mode/references/plan-redesign.md) | Existing steps, failed premises, unnecessary work, and useful experiments. |
+| [Fast migration](../skills/vitalik-mode/references/fast-migration.md) | Replacement boundaries, consumer changes, writes, and required retirement. |
+| [Performance](../skills/vitalik-mode/references/performance.md) | Representative measurements, limiting work, and accepted final behavior. |
+| [Incident recovery](../skills/vitalik-mode/references/incident-recovery.md) | Supported mitigation, actual effects, restoration, and recurrence work. |
 | [Decision tactics](../skills/vitalik-mode/references/decision-tactics.md) | Time, information, reversibility, and stopping decisions. |
 | [Planner contract](../skills/vitalik-mode/references/planner-contract.md) | Evidence, conditional plan, recovery, and replanning triggers. |
 | [Fast delivery](../skills/vitalik-mode/references/fast-delivery.md) | CI, batches, exact revisions, releases, and recovery. |

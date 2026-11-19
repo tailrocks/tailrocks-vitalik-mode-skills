@@ -14,6 +14,11 @@
 - Distinguish branch repair, live-service restoration, and persistent effects.
 - Add established delivery tactics and source-backed scenario guidance.
 - Preserve recurring costs, ownership gaps, and revisit conditions for debt.
+- Reassess the whole remaining plan when the mode activates.
+- Keep the core generic and select practice references from the current goal.
+- Add plan redesign, full migration, performance, and incident practices.
+- Preserve armed selectors, unchanged plans, and useful incident mitigation.
+- Compare Poteto's related principles with the mode's decision contract.
 
 This is the first release.
 No previous package requires migration.

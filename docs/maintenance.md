@@ -175,6 +175,66 @@ They do not measure live delivery speed or prove general optimality.
 They do not establish native host installation or runtime model-routing support.
 The [research guide](research.md) records the sources and their limits.
 
+### Generic mode iteration
+
+The 2026-11-20 iteration generalized the core and the planner contract.
+Time to market and time to delivery now explicitly control the priority.
+Useful delivery can precede full restoration when the goal permits that
+tradeoff.
+Required restoration remains active work through verification.
+The mode becomes inactive when the goal's completion conditions hold.
+
+The research and reviews again used `gpt-6.2-astra` and `gpt-6.2-sol` at `ultra`.
+The interface accepted the requested model and effort settings.
+Two reviewers examined successive integrated versions.
+The revision moved workflow details into context-selected references.
+It added plan redesign, migration, performance, and incident practices.
+The [research guide](research.md#comparison-with-poteto) records the Poteto
+comparison and its pinned source.
+
+Review corrected these material problems:
+
+- The planner assumed red-main work and omitted the existing plan on first
+  activation.
+- An armed mode could lose selectors or fail to bind its first goal.
+- An unchanged repeat command could replace useful planning or model settings.
+- Initial planning could delay an already authorized incident mitigation.
+- Late findings could bypass disposition and active tracking.
+- A partial cutover could remove a fallback that the goal explicitly retained.
+- A performance task could require a redundant benchmark or favor a small patch
+  over faster delivery.
+- Competing time metrics could suppress valuable early delivery despite an
+  acceptable recovery period.
+
+Four fresh threads produced read-only plans for fifteen independent scenarios.
+Two threads used `gpt-6.2-astra` at `ultra`.
+Two threads used `gpt-6.2-sol` at `ultra`.
+They received the current skill, task facts, and scope without expected answers.
+They performed no project changes or live operations.
+
+| Scenario | Observed behavior |
+| --- | --- |
+| G1: Full renderer replacement from a five-step plan | Kept verified inventory, removed speculative framework work, combined caller migration, and retained final removal and checks. |
+| G2: Parser optimization cannot reach the request target | Used the sequential timing bound and selected a bounded downstream experiment. Preserved exact results and resource limits. |
+| G3: Direct enum addition | Kept the sufficient three-step plan and selected no specialist practice. |
+| S1: Armed mode receives its first goal | Retained requested selectors, bound the goal once, and prepared a whole-plan request. |
+| S2: Mode disabled before a new goal and a late result | Kept the new goal inactive and rejected the stale result as authority. |
+| S3: Unchanged repeated activation after host defaults change | Retained the accepted plan, generation, and explicit planner settings. |
+| S4: Status with open repair and tracking work | Reported the actual fields without writes, execution, or replanning. |
+| S5: Quoted activation and a child request | Continued ordinary work without activating the mode. |
+| E1: Incident mitigation during initial planning | Selected the authorized writer pause immediately and retained diagnosis, actual effects, and required restoration. |
+| E2: Partial cutover with retained fallback | Preserved the fallback interval and separate client. Restricted removal to the requested boundary. |
+| E3: Late findings and a tracker timeout | Kept required fixes in the goal and preserved active or pending tracking for the optional improvement. |
+| E4: Authorized documentation integration with red CI | Selected the admin batch and shared repair. Preserved revision checks and honest timing. |
+| V1: Earlier useful delivery with later restoration | Selected hour-two delivery with hour-eight restoration under the accepted hour-ten limit. Kept recovery active. |
+| V2: Earlier delivery exceeds the restoration deadline | Selected the route that met the binding hour-seven deadline. |
+| V3: Early artifact lacks consumer access and required behavior | Excluded the preview from useful delivery and selected the earlier complete capability. |
+
+These scenarios examine instruction behavior under supplied facts.
+They do not establish empirical speed gains or native support across all agents.
+The earlier delivery scenarios remain historical evidence for the previous
+revision.
+
 ## Release
 
 1. Update the version in the portable manifest.

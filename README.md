@@ -1,20 +1,27 @@
 # tailrocks-vitalik-mode-skills
 
-Vitalik mode prioritizes total delivery time for an explicitly selected goal.
-A strong planning subagent diagnoses the cause and proposes a fast execution
-plan.
-The primary agent executes that plan, accepts temporary red CI, and owns
-recovery.
+Vitalik mode applies expert engineering judgment to the current goal.
+Time to market and time to delivery are its primary metrics.
+It brings the most valuable results forward within the requested outcome.
+A strong planning subagent reassesses the whole remaining plan.
+It challenges process, architecture, and sequencing with evidence.
+It prioritizes earlier useful delivery and accounts for required recovery.
+The primary agent keeps its model and executes the accepted plan.
+
+The mode can accept temporary instability or incomplete intermediate behavior.
+It restores the required correctness before completion.
+Its practices cover feature work, migration, performance, incidents, and
+delivery.
 Valid review findings remain tracked when their implementation can wait.
 
 ## Skills
 
 | Skill | Task |
 | --- | --- |
-| [vitalik-mode](skills/vitalik-mode/SKILL.md) | Enable, inspect, or disable fast delivery for the current goal. |
+| [vitalik-mode](skills/vitalik-mode/SKILL.md) | Enable, inspect, or disable whole-plan reassessment and fast execution for the current goal. |
 
 This package contains one portable instruction skill and its required resources.
-It adds no background process, runtime hook, or automatic merge tool.
+It adds no background process, runtime hook, or executable skill wrapper.
 
 ## Install
 
@@ -44,7 +51,7 @@ The [installation guide](docs/installation.md) gives the supported forms.
 
 ## Use
 
-Enable the mode during a blocked goal:
+Enable the mode for the current goal:
 
 ```text
 /vitalik-mode on
@@ -63,12 +70,23 @@ Inspect or disable it:
 /vitalik-mode off
 ```
 
-The planner compares ordinary processing with a faster path using actual
-evidence.
-The plan can use administrator merges, batch integration, selective CI
-cancellation, and a red main branch during repair.
+Activation reassesses every remaining step, including an existing plan.
+The planner preserves useful completed work and explains material changes.
+It selects only the practices that fit the goal and observed bottleneck.
+It can remove unnecessary work, change the design, combine steps, or change
+their order.
+An unchanged plan remains valid when it best serves the goal's delivery
+priorities.
 The primary agent records the tradeoff and executes the accepted plan.
 It requests another plan when material evidence changes.
+Earlier valuable delivery can justify a longer bounded recovery period.
+Required restoration remains in the active goal until verified.
+
+For a complete migration, the plan includes the requested legacy removal.
+For performance work, it targets the measured limiting work.
+For CI congestion, it can use authorized administrator merges and temporary
+red main.
+These workflow details live in optional practice references.
 
 Valid, aligned review findings become issues or linked sub-issues when deferred.
 The report distinguishes those findings from fixed defects and reasoned

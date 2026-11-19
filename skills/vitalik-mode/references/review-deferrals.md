@@ -43,7 +43,7 @@ If the issue is closed, inspect its resolution and the current defect.
 If the defect remains, create a current issue or reopen the old issue when
 authorized.
 If the earlier work fixed the defect, record the supporting evidence instead.
-If creation times out, inspect the repository before retrying.
+If creation times out, inspect the tracker before retrying.
 Use a stable source URL or review identifier to prevent duplicate issues.
 
 Create one issue when the findings share one implementation outcome.
@@ -57,7 +57,8 @@ links.
 Use the [deferred issue template](../assets/deferred-issue.md).
 Include these facts:
 
-- The original review comment, PR, file, and relevant source revision.
+- The original finding and its evidence.
+- The review comment, PR, file, and source revision when applicable.
 - The finding and why it is valid.
 - Its impact and alignment with the intended outcome.
 - Why current delivery takes priority.

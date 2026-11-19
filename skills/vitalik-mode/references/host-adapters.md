@@ -154,5 +154,6 @@ mode activation.
 
 Use a separate read-only planner if a native tool or an authorized external
 route supports the requested settings.
-If no suitable route exists, apply the fallback in [SKILL.md](../SKILL.md).
+If no suitable route exists, use the
+[planner fallback](planner-contract.md#select-the-route).
 [Agent Skills specification](https://agentskills.io/specification)
