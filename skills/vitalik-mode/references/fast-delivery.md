@@ -1,86 +1,237 @@
 # Fast delivery
 
-## Diagnose the delay
+- [Find the delay](#find-the-delay)
+- [Choose a tactic](#choose-a-tactic)
+- [Diagnose CI evidence](#diagnose-ci-evidence)
+- [Inspect revisions and integrate](#inspect-revisions-and-integrate)
+- [Release CI capacity](#release-ci-capacity)
+- [Recover a red branch or service](#recover-a-red-branch-or-service)
+- [Release and verify](#release-and-verify)
 
-Inspect the queue, job duration, cache behavior, recent failures, and source
-changes.
-Distinguish slow compilation from a failed assertion or a deployment failure.
-Compare related jobs before attributing failures to shared infrastructure.
-Include deployment coupling when a merge can trigger publication automatically.
+## Find the delay
 
-Use observations to estimate the normal critical path.
-Compare it with batch integration and expected repair.
-Do not copy the user's illustrative timings into the plan as measured facts.
+Define what must work for the recipient and which checks can change the
+delivery decision.
+Measure queue time, job execution, repeated validation, and rollout time at
+the blocking stage.
+Use comparable recent runs.
+Label estimated timings.
+Take one cheap measurement when missing evidence could change the path.
 
-## Merge before green CI
+Compare elapsed time to usable delivery for normal processing and the shortcut.
+Count overlapping steps once.
+Include remaining checks, likely recovery work, and time lost to displaced
+runner capacity or invalidated jobs.
+Consider a plausible recovery overrun alongside the likely case.
+Use the user's illustrative timings as hypotheses until verified.
 
-Use supported administrator merge operations when the current authority permits
-them.
-Preserve the repository and target selected for the goal.
-Resolve each selected PR's current head before its merge.
-Use an atomic expected-head condition when the merge interface supports it.
-If that condition fails, inspect the new head before retrying.
-If no atomic condition exists, disclose the race and inspect the merged revision
-before extending the batch.
-If its contents changed after analysis, inspect the change before including it.
-Read dependency ordering and overlapping edits before selecting a batch.
+Watch for automatic publication, deployments, migrations, or downstream builds
+triggered by merges.
+Estimate effects on repository users separately from effects on consumers.
+Read [decision tactics](decision-tactics.md) for the decision procedure.
 
-Choose batch boundaries that reduce total integration time.
-A batch can be large when evidence supports its independence and recovery cost.
-Do not merge unrelated or unexamined work merely because it is available.
-Do not wait for pending compilation solely because the normal process requires
-green CI.
+## Choose a tactic
 
-Record which signals the decision used and which checks remain pending.
-Do not fabricate passing checks or alter check results.
-If the platform denies the supported merge operation, report the actual blocker.
-Replan with available operations without bypassing access controls.
+Use the tactic that fits the observed delay and the current authority.
+
+| Observed bottleneck | Try first | Examine before proceeding |
+| --- | --- | --- |
+| Runner wait or redundant work dominates | Cancel superseded runs or limit jobs in flight to the available build capacity. | Keep unique evidence. Inspect deployment or teardown work before cancellation. |
+| Moving target invalidates otherwise useful PR checks | Use an available merge queue or train to validate against the target and queued predecessors. | Confirm candidate checks run and parallel capacity exists. If queue entries change, inspect rerun costs. |
+| Job work dominates | Measure the longest stage. Reuse deterministic outputs or parallelize independent work if runners are available. | Confirm the saved time exceeds restore, dispatch, or coordination cost. |
+| Intermittent results dominate | Run the cheapest controlled comparison that distinguishes a code regression from runner, environment, or test behavior. | Track a quarantine only when the plan justifies it, an alternate signal exists, and the task permits it. |
+| Compatible changes repeatedly pay a fixed CI cost | Compare an authorized admin batch with ordinary processing. Use focused checks on the combined result. | Record dependencies, expected red state, first observation, and recovery cost. |
+| Production exposure limits delivery | Use an existing flag, a representative canary, or an authorized release route that separates integration from exposure. | Confirm compatibility, observation criteria, and a usable stop or restore action. |
+| One large replacement blocks delivery | Ship an independently useful slice through an allowed interface, implementation, or routing seam. | Include temporary compatibility work and removal in the cost. Respect any required complete migration. |
+
+A queue can avoid serial stale-base retries.
+GitHub Actions workflows for queue-required checks need a `merge_group` trigger.
+Its merge limits group target updates after checks and do not combine builds.
+GitLab trains validate cumulative candidates in parallel.
+Changing earlier train entries can invalidate later runs.
+These are platform mechanics to apply when timing supports the tactic.
+[GitHub merge queues](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-a-merge-queue)
+
+[GitLab merge trains](https://docs.gitlab.com/ci/pipelines/merge_trains/)
+
+Use shorter batches when faster feedback or smaller recovery scope wins.
+Use larger batches when shared overhead dominates and evidence bounds
+interactions and recovery.
+Set concurrency from available capacity and batch size from integration risk.
+Keep deployment exposure independently adjustable where the host permits it.
+Base exceptional merges and red-branch decisions on the goal's evidence and
+authority.
+[DORA small batches](https://dora.dev/capabilities/working-in-small-batches/)
+
+[DORA work in process limits](https://dora.dev/capabilities/wip-limits/)
+
+## Diagnose CI evidence
+
+Read the first causal failure and its stage.
+Compare relevant job logs on the same source revision and configuration.
+Treat a cache miss as evidence of recomputation when timings support it.
+Investigate an assertion, compiler error, or deployment failure on its own
+evidence.
+
+Use a clean or cache-read-disabled run on the same inputs to examine suspected
+cache corruption.
+Use equivalent baseline and candidate runs to examine whether the change
+introduced the failure.
+Keep the first retry focused on the hypothesis.
+Treat an intermittent pass as evidence of intermittency.
+Investigate candidate-only flakiness when changed behavior could cause it.
+
+Retain a discriminating check if the plan removes a noisy test from its
+critical path.
+Track an authorized quarantine with an owner or explicit gap and an exit
+condition.
+For repeatable build reuse, capture declared inputs and the exact output
+identity.
+Pin dependencies and tools where the build supports it.
+Measure useful cache hits and the cost of restore and upload.
+Limit shared production cache writes to trusted builders.
+[Bazel remote caching](https://bazel.build/remote/caching)
+
+[Google SRE on test evidence](https://sre.google/sre-book/testing-reliability/)
+
+## Inspect revisions and integrate
+
+Record the target baseline, each reviewed PR head, and the inputs behind
+the useful checks.
+Order dependent changes before selecting each batch.
+Keep inseparable changes together when they need a combined checkpoint.
+Group independent changes when shared work justifies batching them.
+Inspect overlaps in code, build configuration, contracts, and shared state.
+Before each merge, inspect what the intermediate revision can publish or deploy.
+A sequential merge batch is not an atomic target update.
+If intermediate effects exceed authority, use a combined candidate or an
+authorized activation boundary.
+
+Use supported administrator merge operations within the repository's current
+authority.
+Compare the current PR head with the reviewed head before each merge.
+Use an atomic expected-head condition when the interface supports it.
+Inspect the new head if that condition fails.
+If the operation lacks that condition, record the race.
+Verify the merged content before extending the batch.
+
+Inspect the target revision before each merge.
+Compare it with the baseline plus planned merges.
+If the target moves, inspect affected dependencies and validation assumptions.
+Use an atomic target condition if the interface supports it.
+After each merge, compare the resulting revision with the expected changes.
+Stop extending the affected batch when an unplanned change invalidates the
+evidence.
 
 GitHub CLI supports `--match-head-commit` with an authorized `--admin` merge.
-GitHub's merge API accepts an expected head SHA.
-Use the exact head that the analysis covered.
-[GitHub CLI merge](https://cli.github.com/manual/gh_pr_merge) documents the
-command options.
+That condition covers the PR head.
+[GitHub CLI merge](https://cli.github.com/manual/gh_pr_merge)
+
+Name the first batch, largest allowed batch or exposure, and observation
+point in the plan.
+Specify conditions for growing, shrinking, pausing, or reverting it.
+Use those preplanned options as observations arrive.
+Replan before taking another shortcut if a new failure type, material target
+change, or recovery overrun invalidates the plan.
+
+Keep pending checks whose decision or recovery value justifies their cost.
+Wait for the checks the plan needs to make the merge decision.
+Proceed while other checks are pending when the plan justifies the shortcut.
+Record completed, pending, canceled, and skipped checks accurately.
+Report the actual blocker if the platform denies the supported operation.
+Replan using available permissions.
 
 ## Release CI capacity
 
-Identify runs by repository, workflow, event, source revision, and current
-purpose.
-Cancel runs that are superseded, duplicated, or unnecessary for the selected
-plan.
-Consider lost coverage and any teardown or deployment work before cancellation.
-Keep a useful latest integrated run when it provides information needed for
-recovery.
-Do not cancel a run merely because it contains inconvenient evidence.
-Record canceled runs separately from passing or failing checks.
+Identify runs by repository, workflow, event, tested revision, and purpose.
+Cancel a run when supersession, duplication, or lost relevance makes its
+remaining work unnecessary.
+Determine whether it occupies capacity needed by useful work.
+Consider the information a nearly complete run can provide.
+Before cancellation, inspect release, migration, and cleanup side effects.
+Keep the latest useful integrated check when it can distinguish expected
+breakage from a new regression.
+Record each cancellation and its reason.
 
-## Work with a red main branch
+## Recover a red branch or service
 
-Treat temporary red main as an allowed intermediate state.
-Before merging, name the expected failure and the proposed repair when known.
-For uncertain integration failures, name the first diagnostic step and a
-credible recovery option.
-Keep the primary agent responsible for recovery.
+Treat temporary red main as an active recovery state.
+Before merging, record the expected failure or the first diagnostic for an
+uncertain failure.
+Record the baseline, even if it already fails.
+Identify a known-good source or compatible artifact when available.
+Otherwise, name the forward repair or isolation path and its first check.
+Record the recovery owner, next action, and next observation point.
+Name the failure or elapsed-time trigger that ends the attempt.
 
-After the batch, inspect the integrated branch and relevant failures.
-Fix shared causes before repeating per-PR work.
-Use focused checks to decide the next action.
-Choose forward repair or rollback by expected total delivery time.
+Run the planned check on the actual integrated result.
+Repair shared causes before repeating per-PR work.
+Pause further exposure when the result exceeds the agreed breakage.
+Use a focused revert, a smaller dependency-complete subset, or a forward fix
+to narrow the cause.
+Bisect when a stable check distinguishes known-good and failing revisions.
+Treat results from skipped or unbuildable revisions as uncertain.
+If subsets pass but the combined candidate fails, inspect interactions.
 
-Use the plan's next observation point to detect a deteriorating approach.
-If scope, failure type, or recovery time changes materially, request a revised
-plan.
-Do not extend a failing batch on the strength of the original estimate alone.
+Compare the remaining time and effects of a revert, redeploy, flag change,
+traffic shift, and forward fix as applicable.
+Consider compatibility, repair already completed, and the next verification.
+Restore live service separately when branch repair takes longer.
+Prefer the known compatible restore path when forward repair is still
+uncertain.
+Roll forward when rollback is incompatible or a tested fix restores faster.
+Verify actual recovery using the relevant branch check or consumer signal.
+[Git bisect](https://git-scm.com/docs/git-bisect)
 
-## Alternative release paths
+[Google SRE on reliable releases and rollbacks](https://cloud.google.com/blog/products/gcp/reliable-releases-and-rollbacks-cre-life-lessons)
 
-Use a custom or manual release route when the goal authorizes publication.
-Identify the exact source revision, version, destination, and required artifact.
-Inspect the actual published result after the release.
-Retain enough source and artifact information to repair the release if
-necessary.
+## Release and verify
 
-Report delivery and CI status as separate facts.
-A delivered artifact can have pending checks.
-A green check does not by itself prove that the requested artifact was
-delivered.
+Use a custom or manual route when authorized publication and the time comparison
+favor it.
+Use evidence-supported estimates when measurements are unavailable.
+Identify source revision, relevant build inputs, artifact identity, version,
+and destination.
+Record the artifact digest when available.
+Promote the validated artifact unchanged when the route supports it.
+Revalidate a rebuilt artifact when its inputs or output differ from the
+validated build.
+Retain the compatible recovery artifact when applicable.
+Inspect the delivered artifact or deployed behavior at the destination.
+
+Report integration, deployment, activation, and consumer verification as
+applicable.
+If a flag improves delivery or recovery, use it to separate activation from
+deployment.
+When flag states affect delivery or recovery, examine both states.
+For a canary, choose a representative cohort and meaningful baseline or control.
+Define metric thresholds, minimum observations, promotion trigger, and stop
+action before exposure.
+Determine whether shared resources invalidate the comparison.
+Account separately for state changes that survive flag disablement or traffic
+rollback.
+
+Use branch by abstraction to switch local implementations at a shared seam.
+Use Strangler Fig when independent routes or capabilities can migrate to a
+replacement system.
+Add a flag or compatibility seam only when permitted and it reduces total
+delivery or recovery time.
+Track the temporary mechanism's removal and the condition that makes it safe.
+
+For an allowed staged migration, expand the interface or schema compatibly.
+Verify mixed versions before migrating data or consumers.
+Identify which implementation owns writes during a state transition.
+Verify data and traffic before contracting the old interface.
+Establish which previous artifact can operate against each state.
+Contract after the remaining consumers and rollback plan allow it.
+Use a direct verified cutover when the task requires complete replacement and
+temporary compatibility would violate that scope.
+[Google SRE on canarying](https://sre.google/workbook/canarying-releases/)
+
+[Branch By Abstraction](https://martinfowler.com/bliki/BranchByAbstraction.html)
+
+[Strangler Fig](https://martinfowler.com/bliki/StranglerFigApplication.html)
+
+[Parallel Change](https://martinfowler.com/bliki/ParallelChange.html)
+
+State the observed delivery outcome separately from pending checks and repairs.

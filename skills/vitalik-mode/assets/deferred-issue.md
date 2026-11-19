@@ -17,6 +17,9 @@ outcome.}}
 {{Explain why current delivery has higher priority and what remains
 unresolved.}}
 
+- Recurring cost or exposure:
+- Observed recurrence: unknown
+
 ## Acceptance criteria
 
 - [ ] {{Observable result that resolves this finding.}}
@@ -25,7 +28,8 @@ unresolved.}}
 
 - Proposed change:
 - Dependencies or child issues:
-- Revisit condition:
+- Revisit trigger:
+- Review date or expiry (optional):
 - Owner: unassigned
 
 ## Coverage

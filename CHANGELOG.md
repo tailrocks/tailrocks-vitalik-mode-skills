@@ -9,6 +9,11 @@
 - Permit deliberate delivery shortcuts and temporary red CI.
 - Preserve valuable deferred review findings as tracked work.
 - Add portable manifests and agent installation guidance.
+- Compare actual critical paths, useful observations, and compatible recovery.
+- Add conditional batch adaptation and target-revision inspection.
+- Distinguish branch repair, live-service restoration, and persistent effects.
+- Add established delivery tactics and source-backed scenario guidance.
+- Preserve recurring costs, ownership gaps, and revisit conditions for debt.
 
 This is the first release.
 No previous package requires migration.

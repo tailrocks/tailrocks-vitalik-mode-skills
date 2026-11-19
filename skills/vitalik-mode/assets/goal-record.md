@@ -1,5 +1,9 @@
 # Vitalik mode goal record
 
+Use the host's existing plan format when possible.
+Complete only fields that affect this goal.
+Keep one authoritative record.
+
 ## Identity
 
 - Goal ID:
@@ -30,7 +34,14 @@
 - Planning result locator:
 - Accepted plan and current step:
 - Time comparison and estimate basis:
+- Completion bottleneck and overlapping work:
+- Delay imposed on other work:
+- Affected branch, consumers, live service, and data:
+- Initial batch and permitted adaptations:
+- Decisive observations and pass/fail actions:
 - Accepted temporary breakage:
+- Compatible recovery revision or artifact:
+- Residual effects after recovery:
 - Recovery owner and next action:
 - Next observation point:
 - Replanning triggers:
@@ -48,6 +59,9 @@
 - Canceled runs and reasons:
 - Remaining repairs:
 - Published artifacts, if applicable:
+- Observed delivery and recovery time:
+- Estimated normal path and basis for claimed savings:
+- Changed assumptions for the next comparable decision:
 
 ## Handoff
 

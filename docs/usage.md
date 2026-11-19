@@ -27,6 +27,8 @@ The user controls activation.
 Replace the model name with one advertised by the current agent or configured
 provider.
 Use a host-supported effort value or the portable selector `highest`.
+Resolve the ordering from the host's current controls.
+Names such as `max` and `ultra` do not have a universal cross-host ordering.
 Quote a model name that contains spaces.
 
 The agent records the requested and actual planner settings separately.
@@ -88,6 +90,25 @@ New evidence can change the batch or its recovery plan.
 The delivery report distinguishes merged work, working behavior, and remaining
 checks.
 
+## Select the fastest useful tactic
+
+The planner identifies the dependency that determines delivery time.
+It compares remaining elapsed time across credible paths.
+It includes shared capacity, overlapping work, and recovery.
+It can keep a useful check running while another dependency finishes.
+
+The plan specifies batch limits and conditions for adaptation.
+The primary agent can grow or shrink a batch within those limits.
+It can execute a covered fallback without another planning round.
+New effects or invalid assumptions require a revised plan.
+
+Integration, deployment, activation, and consumer verification remain distinct.
+A source revert does not necessarily undo data or published artifacts.
+The recovery plan identifies the compatible artifact or forward repair.
+
+The [engineering tradeoffs guide](research.md) explains the research and
+scenario choices.
+
 ## Review findings during fast delivery
 
 The mode retains each useful finding even when the current goal has greater
@@ -100,6 +121,9 @@ Every deferred finding retains its source and the reason for deferral.
 A matching closed issue is insufficient when the defect still exists.
 The agent finds an active tracking destination or reports a tracking gap.
 Resolving a review thread does not mean that its defect was fixed.
+Follow-ups retain recurring costs, ownership gaps, and observable revisit
+conditions.
+An expired review date prompts reassessment and does not close the finding.
 
 The
 [review deferral procedure](../skills/vitalik-mode/references/review-deferrals.md)
