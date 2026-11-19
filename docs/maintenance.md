@@ -235,6 +235,43 @@ They do not establish empirical speed gains or native support across all agents.
 The earlier delivery scenarios remain historical evidence for the previous
 revision.
 
+### Current model iteration
+
+The next 2026-11-20 iteration examined nine documented model products.
+The [model research](model-research.md) records their IDs, controls, and sources.
+GPT-6.2 Astra and GPT-6.2 Sol performed the research and instruction reviews.
+The delegation interface accepted `ultra` for those tasks.
+The other seven models were examined through published documentation.
+
+Two reviewers examined the integrated changes.
+Their findings restored immediate authorized mitigation and focused recovery of
+an incomplete planning response.
+Both reviewers found their final material findings resolved.
+The core remains generic at 206 lines.
+Its detailed model controls remain in the host reference.
+
+Three fresh threads handled ten read-only scenarios with task-local facts.
+Two threads used Astra at `ultra`.
+One thread used Sol at `ultra`.
+The prompts supplied no expected answers.
+
+| Scenario | Observed behavior |
+| --- | --- |
+| A: Valuable CSV before the required API | Counted consumer-ready CSV delivery and retained API acceptance before completion. |
+| B: Export shared by every migration route | Started the independent authorized export while the whole-plan report remained pending. |
+| C: Conversion completed during a handoff | Reconciled the completed job and advanced to consumer verification without another submission. |
+| R1: Wonder Full requested through a base-model API route | Preserved the product selection, reported the unavailable route, and continued ordinary work. |
+| R2: Known effort cap or undisclosed effort | Distinguished an unauthorized mismatch from an unverified effective setting. |
+| R3: Idle, timeout, and partial planner events | Retained the pending child and judged later content by usable whole-goal coverage. |
+| R4: pi child with writable MCP extensions | Selected disabled extensions and restricted evidence tools, then required actual tool-surface evidence. |
+| M1: Mitigation forecloses live diagnostics | Selected the authorized writer pause immediately and supplied its effects to the planner. |
+| M2: Terminated incomplete report | Selected a focused retry on the requested model and effort within the useful decision window. |
+| M3: One capped profile and another matching profile | Used the existing authorized matching route before selecting a fallback. |
+
+These exercises inspect decisions under supplied evidence.
+They do not measure delivery gains or establish runtime support on other hosts.
+No live production operation or external model installation occurred.
+
 ## Release
 
 1. Update the version in the portable manifest.

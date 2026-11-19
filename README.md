@@ -105,6 +105,7 @@ limits.
 - [Installation](docs/installation.md)
 - [Usage](docs/usage.md)
 - [Engineering tradeoffs](docs/research.md)
+- [Current model research](docs/model-research.md)
 - [Compatibility and sources](docs/compatibility.md)
 - [Maintenance](docs/maintenance.md)
 - [Troubleshooting](docs/troubleshooting.md)

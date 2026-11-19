@@ -145,6 +145,41 @@ The migration reference also compares direct cutover, branch by abstraction,
 and Strangler Fig.
 The goal's actual dependency structure determines which route earns its cost.
 
+## Current model review
+
+The 2026-11-20 review examined the nine model products named by the user.
+The [model research](model-research.md) records their documented controls and
+the review limits.
+Only GPT-6.2 Astra and GPT-6.2 Sol ran as reviewers in this session.
+The host accepted `ultra` for those reviews.
+
+The review retained the generic core and context-selected practices.
+It identified these changes:
+
+| Decision | Improvement |
+| --- | --- |
+| A partial result has immediate user value. | Count actual consumer use as delivery while keeping the full goal active. |
+| Planning overlaps independent work. | Start authorized work whose effects preserve the pending choices. |
+| A useful decision window can expire. | Give the planner that window and include review delay in the comparison. |
+| Several reviewers share one causal summary. | Distinguish inspected observations from supplied interpretations. |
+| An external operation can finish during a handoff. | Reconcile its current state before retrying or extending it. |
+| A host changes a model or explicit effort. | Apply the existing fallback rules and report actual settings. |
+| A host emits a partial or idle event. | Inspect whether its content supplies a usable whole-plan result. |
+| A planner inherits tools or delegates further. | Apply the analysis boundary to its effective tool surface and descendants. |
+
+[Anthropic's workflow guidance](https://claude.com/resources/articles/common-workflow-patterns-for-ai-agents-and-when-to-use-them)
+describes the latency and coordination costs of agent workflows.
+[Its context guidance](https://www.anthropic.com/research/effective-context-engineering-for-ai-agents)
+emphasizes relevant information within a finite context.
+The skill applies these ideas through concise evidence, conditional review,
+and current state.
+It does not require a new comparison of every model before each goal.
+
+The user's explicit model and effort selections remain authoritative.
+Limiting unrelated research does not silently lower those settings.
+The model list stays outside the installed procedure because availability and
+host behavior can change independently.
+
 ## Earlier delivery findings
 
 The initial skill already addressed authority, strong-model planning, mode

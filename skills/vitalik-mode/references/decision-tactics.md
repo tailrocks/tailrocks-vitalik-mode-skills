@@ -95,6 +95,8 @@ Use another reviewer when independent evidence or a competing explanation can
 change the decision.
 A stronger model can improve analysis without supplying new operational
 evidence.
+Distinguish an inspected observation from a supplied interpretation.
+Agreement about one shared summary does not create independent evidence.
 Treat familiar patterns as hypotheses until the current observations match.
 
 For consequential uncertainty, consider a short premortem.

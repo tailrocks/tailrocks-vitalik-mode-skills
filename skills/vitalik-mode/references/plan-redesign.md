@@ -51,7 +51,10 @@ time and effects with the larger plan.
 If feature boundaries remain uncertain, integrate one thin path early to obtain
 useful evidence.
 Keep the remaining required behavior in the active plan.
-Treat that slice as an observation point unless it meets the whole goal.
+Count the slice as useful delivery when intended consumers can use it for a
+valued result.
+Otherwise, treat it as an observation point.
+Record useful delivery separately from completion of the whole goal.
 
 ## Use experiments and tools when they change the result
 

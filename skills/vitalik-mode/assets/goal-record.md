@@ -27,6 +27,7 @@ Keep one authoritative record.
 - Actual effort or unverified:
 - Primary model, unchanged:
 - Delegation route and observed limits:
+- Child identity and report state:
 - Last updated:
 
 ## Evidence and plan
@@ -35,7 +36,9 @@ Keep one authoritative record.
 - Completed results and operations in progress:
 - Selected practices and why they apply:
 - Evidence references and source revisions:
+- Inspected observations and supplied interpretations:
 - Cause and remaining uncertainty:
+- Latest useful planning result, when time-sensitive:
 - Planning result locator:
 - Material plan changes and reasons:
 - Accepted plan and current step:
