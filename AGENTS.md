@@ -4,15 +4,19 @@ This package contains one instruction skill: `vitalik-mode`.
 Keep its procedure in `skills/vitalik-mode/SKILL.md`.
 Keep required resources inside that skill directory.
 Keep installation and maintenance details in `docs/`.
+Start at [the package guide](docs/README.md).
 
 ## Package structure
 
 - Use `plugin.json` as the source of package identity and version.
-- Keep the Claude and Kimi manifests consistent with that source.
+- Keep the Claude, Kimi, and Antigravity manifests and `package.json`
+  consistent with that source.
 - Keep skill frontmatter limited to `name`, `description`, and `license`.
 - Keep explicit activation in the description and skill procedure.
 - Keep `policy.allow_implicit_invocation: false` in `agents/openai.yaml`.
-- Do not add runtime hooks, background processes, or executable skill wrappers.
+  Keep the explicit-only flags in the generated registration entries.
+- Keep the OpenCode and Amp entry points limited to skill registration.
+  Keep hooks and background processes out of the package.
 - Do not store an active goal or operator configuration in this package.
 
 ## Changes and verification

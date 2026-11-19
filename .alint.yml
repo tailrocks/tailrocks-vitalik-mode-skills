@@ -1,5 +1,12 @@
-# Shared active-package profile from the central Tailrocks marketplace.
-# Update the source revision and SHA-256 together.
+# Shared Tailrocks package structure and native resource validation.
+# Update the immutable profile revision and SHA-256 together.
 version: 1
 extends:
-  - https://raw.githubusercontent.com/tailrocks/tailrocks-skills/7b2f3cb6b7896621696b49a43a7d00c96cb48e42/standards/alint/active.yml#sha256-dae9e8f91ac3f5e6a28fb56d67f230fc4c23cc4fbab4763ecc5cc5477a903fba
+  - https://raw.githubusercontent.com/tailrocks/tailrocks-skills/d7ace6576342d796094ab6f52cd2f6f5a4823ede/standards/alint/active.yml#sha256-f03da2d70a7606a0dbba386265e42dd0346cd43dd98edba9df833f3cb4aecd15
+
+rules:
+  - id: native-package-valid
+    kind: command_idempotent
+    level: error
+    command: ["python3", "scripts/validate-package.py", "--check"]
+    message: "Native manifests, registrars, invocation policies, and bundled resources must agree."

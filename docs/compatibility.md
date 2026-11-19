@@ -1,64 +1,64 @@
-# Compatibility
+# Compatibility and verification
 
-These notes apply to package version `0.1.0`.
-They describe the official documentation examined through 2026-11-20.
-A documented host feature does not establish a successful package installation
-or live model run.
-The package has no runtime compatibility results for the hosts below.
+`tailrocks-vitalik-mode-skills` version `0.2.0` publishes 1 skills from
+one `skills/<id>/SKILL.md` tree. Each skill keeps its references, scripts,
+and assets in the installed package.
 
-## Package boundaries
+## Install routes
 
-The package supplies the [portable skill](../skills/vitalik-mode/SKILL.md) , its
-resources, and plugin manifests.
-The host supplies skill discovery, tool permissions, model selection, and
-session persistence.
-The skill carries mode state in the active goal or plan record.
-See [mode state](../skills/vitalik-mode/references/mode-state.md) for
-continuation and handoff behavior.
-
-Codex reads the explicit-only policy in `agents/openai.yaml`.
-Other hosts can discover or load the skill according to their settings.
-The skill requires explicit user intent before it can enable the mode.
-Discovery, automatic loading, and quoted commands do not supply that intent.
-The skill's prose does not enforce the host's tool permissions.
-[Codex invocation policy](https://learn.chatgpt.com/docs/build-skills) ·
-[Agent Skills specification](https://agentskills.io/specification)
-
-## Planner capabilities
-
-| Host | Documented planner route | Relevant limit |
+| Host | Tailrocks distribution | Explicit invocation |
 | --- | --- | --- |
-| Claude Code | Use the Agent tool with a model alias. Use a custom definition for a full model ID. | Per-call effort for a non-fork subagent requires 2.1.292 or later. The environment can override effort. [Subagents](https://code.claude.com/docs/en/sub-agents) |
-| Codex | Set the model and effort in the subagent launch when the tool exposes them. | Custom agent fields take precedence. The current provider and host determine available routes. [Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) |
-| Grok Build | Use the exposed subagent model field or an existing profile. Some workflow launches support independent child effort. | The inheritance setting can hide per-call model selection. Skill frontmatter does not set the route. [Subagents](https://github.com/xai-org/grok-build/blob/main/crates/codegen/xai-grok-pager/docs/user-guide/16-subagents.md) · [Skills](https://docs.x.ai/build/features/skills-plugins-marketplaces) |
-| omp | Use a configured task agent or an authorized per-call model and effort selector. | `task.perCallModel` controls the launch surface. Operator grants and `task.maxEffort` still apply. [Task agents](https://github.com/can1357/oh-my-pi/blob/main/docs/task-agent-discovery.md) |
-| pi | Use an available subagent extension or an authorized independent `pi` process. | Tool filtering does not disable extensions or MCP. Inspect the effective tool surface. [Extensions](https://docs.pi.dev/latest/extensions) · [CLI](https://docs.pi.dev/latest/cli) |
-| OpenCode | Use a configured subagent profile with the requested model and reasoning variant. | V2 selects the profile by ID. V1 and V2 use different configuration fields. [Agents](https://opencode.ai/docs/agents) · [Tools](https://opencode.ai/docs/tools) |
-| Muse Code | Use a custom agent or supported workflow child with a model and effort. | An unavailable custom-agent model can fall back to the lead model. Inspect the recorded route. [Custom agents](https://dev.meta.ai/docs/muse-code/agents) |
-| Kimi Code | Use a configured subagent model pool alias or variant. | A pool-wide effort can override the variant. The model must support the requested setting. [Configuration](https://www.kimi.com/code/docs/en/kimi-code-cli/configuration/config-files#secondary_model) |
-| Other Agent Skills hosts | Use native delegation or an authorized external planner if available. | The standard defines the skill layout. The host determines the invocation and planner capabilities. [Specification](https://agentskills.io/specification) |
+| Claude Code | Native marketplace plugin | `/tailrocks-vitalik-mode-skills:vitalik-mode` |
+| Codex | Native marketplace plugin | `$tailrocks-vitalik-mode-skills:vitalik-mode` in the CLI |
+| Grok Build | Native marketplace plugin | `/vitalik-mode` or `invocableAs` |
+| Muse Code | Native marketplace snapshot | `/vitalik-mode` or picker entry |
+| omp | Native marketplace plugin | `/skill:vitalik-mode` or resolved name |
+| OpenCode V2 | Git package with server plugin | `@vitalik-mode` |
+| Amp | Directory plugin | Ask to load `tailrocks-vitalik-mode-skills:vitalik-mode` |
+| Antigravity | Native local plugin install | `/vitalik-mode` |
+| pi | Native Git package | `/skill:vitalik-mode` |
+| Kimi Code | Additional native marketplace plugin | `/skill:tailrocks-vitalik-mode-skills:vitalik-mode` |
 
-Use the [installation guide](installation.md) for explicit invocation on each
-host.
-Use the [host adapters](../skills/vitalik-mode/references/host-adapters.md) to
-select and verify a route.
-The dated [model research](model-research.md) records the requested model
-families and their different control surfaces.
-It does not establish their availability in an installed host or account.
+Claude Code, Grok Build, and omp read the shared Claude catalog. Its URL
+sources carry a full commit SHA and a package version. Codex and Muse read
+the full commit in the Codex catalog's `source.ref`.
 
-## Verify a host and model
+Muse's portable importer reads the root Agent Plugins manifest. Keep every
+skill one directory below `skills/`. Muse refuses symlinks in plugin packages.
+[Portable plugin compatibility][muse]
 
-Use a disposable session with a read-only diagnosis task.
-Record the host build, package revision, and available planner settings.
-Inspect `status` before activation.
-Enable the mode with a model and effort the host exposes.
-Inspect the child's runtime metadata for the effective model and effort.
-Make sure that the primary model stays the same.
-Make sure that the child returns a report and does not perform execution work.
-Continue the same goal and inspect `status` again.
-Turn the mode off and confirm that a new goal starts inactive.
+OpenCode V2 and Amp execute small registrars at plugin load. OpenCode reads
+the installed Markdown and registers the skill with its canonical file path.
+Amp registers each skill directory with `registerSkill`.
 
-Separate installation checks from model evaluations.
-Record an unobservable model or effort as unverified.
-Record the actual route if the host substitutes a model or caps the effort.
-Keep any environment-dependent variations with the recorded check result.
+The registrars add skills only. Loading this package makes no model request
+and starts no background task, hook, or MCP server. A selected skill may use
+its bundled scripts when the workflow calls for them.
+
+Each host controls implicit skill selection and runtime permissions. Preserve
+any explicit-user-invocation rule in the skill. Discovering or registering a
+skill supplies no authority to perform the actions in its instructions.
+
+## Verified scope
+
+See [package verification](verification.md) for the tested revision,
+tools, results, and remaining host-specific limits.
+
+The shared pinning tests used Claude Code `2.1.328`, Codex CLI
+`0.167.0-alpha.4`, Grok Build `1.0.89`, and Muse Code `1.4.24`.
+Each host installed an older commit while the default branch pointed elsewhere.
+
+A separate OpenCode `2.3.2` fixture loaded skills through its live server
+registry and resolved installed script paths. The Amp registrar fixture used
+an API test double. These are distinct from package-specific verification.
+
+A registry listing establishes discovery. To verify a workflow, exercise its
+specified inputs, permissions, and expected result in the intended host.
+Private Git sources and hosted workspace installations require separate access.
+
+See the [installation guide](installation.md) for install, update, and removal
+commands. The [central distribution guide][distribution] records host-specific
+source formats and test evidence.
+
+[muse]: https://meta-models.github.io/muse-code-sdk/1.4/guides/plugins/concepts/compatibility/
+[distribution]: https://github.com/tailrocks/tailrocks-skills/blob/main/docs/standards/distribution.md

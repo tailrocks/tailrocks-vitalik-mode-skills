@@ -39,6 +39,9 @@ Retain useful findings when their implementation can wait.
 
 ## Before you start
 
+When choosing a model, reasoning effort, or delegation route, read
+[model and reasoning choices](references/model-routing.md).
+
 Accept these command forms with the host's native skill prefix:
 
 ```text

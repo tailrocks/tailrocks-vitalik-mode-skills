@@ -3,95 +3,58 @@
 ## Package ownership
 
 Maintain the procedure in [the skill](../skills/vitalik-mode/SKILL.md).
-Keep its references and assets inside the same directory.
-The package requires no runtime script, hook, server, or background process.
-The Python command below serves package maintenance only.
-
-Use
-[the shared structure](https://github.com/tailrocks/tailrocks-skills/blob/main/docs/standards/structure.md)
-.
-Obey
-[the shared writing rules](https://github.com/tailrocks/tailrocks-skills/blob/main/docs/standards/writing.md)
-.
-Keep human installation steps separate from the skill procedure.
+Keep its references and assets with the skill. Keep activation and goal state
+in the authorized host context. The native OpenCode and Amp entries register
+only the installed skill. Follow [the package structure](architecture.md).
 
 ## Local verification
 
-Run these commands from the package root:
+Run these commands from the package root.
 
 ```sh
 python3 scripts/validate-package.py
-alint check
+alint check --fail-on-warning
+npm pack --dry-run --json
 ```
 
-Python 3.9 or newer is sufficient for the maintenance command.
-The command uses only the standard library.
-It examines duplicate JSON keys, manifest agreement, portable frontmatter, skill
-identity, heading order, explicit activation, and local resource paths.
-It does not run a model or exercise an agent.
-Expected result: one `OK` line and exit code zero.
+The Python validator checks native manifests, adapters, skill metadata, and
+packaged resource paths. Inspect the npm file list when runtime files change.
+CI checks strict JSON and skill frontmatter. See [verification](verification.md)
+for the expected results and host evidence.
 
-The alint command applies the shared active-package profile.
-Expected result: no errors.
-Its rules cover required files, package boundaries, manifest agreement, file
-names, and skill length.
-
-For Markdown formatting, run:
-
-```sh
-npx --yes markdownlint-cli2@0.23.3 "**/*.md"
-```
-
-Expected result: no formatting issues.
-The Markdown configuration excludes two generator-owned instruction files.
-It permits long table rows and literal code lines.
-Review prose separately for meaning and instruction quality.
-A formatting result does not prove language conformity or agent behavior.
+Use Markdownlint CLI2 `0.23.3` to check Markdown formatting. Review meaning,
+policy, and authority in the changed instructions.
 
 ## Shared policy pin
 
-The `.alint.yml` file selects the central active-package profile.
-Its source revision is `7b2f3cb6b7896621696b49a43a7d00c96cb48e42`.
-Its SHA-256 is
-`dae9e8f91ac3f5e6a28fb56d67f230fc4c23cc4fbab4763ecc5cc5477a903fba` .
-
-When the shared profile changes, update the revision and digest together.
-Read the profile changes before the update.
-Repeat the local verification commands afterward.
+The generated CI uses Alint `0.21.0`. The `.alint.yml` file pins the central
+`standards/alint/active.yml` profile by source revision and SHA-256. Review
+changes to that profile. Update both parts of the pin together. Repeat the
+verification commands after the update.
 
 ## Generated CI
 
-Use Velnor Actions 0.1.80 to generate the GitHub files.
-The `.velnor/release-manifest.json` file records its source and binary digests.
-The `.velnor/config.toml` file selects these verification jobs:
+Use Velnor Actions `0.1.80` from source commit
+`b71a0045e42f6a8b620aa9283d0106bed622fe3b`. The
+[release manifest](../.velnor/release-manifest.json) records the binary digests.
+The input is `.velnor/config.toml`. CI runs Alint, strict JSON, frontmatter ID,
+and Lychee `0.15.1` with `--offline --include-fragments`. The link check covers
+local files and anchors. Generated Jactionlint and the plan feed the same
+required verdict.
 
-- `alint`
-- `strict-json`
-- `frontmatter-id`
-- `link-check`
+Change the generator input and run `velnor-actions generate`. Keep the
+input and generated files together. The generator preserves the repository's
+`.github/PULL_REQUEST_TEMPLATE.md` file.
 
-Run the supported generator after a configuration change:
-
-```sh
-velnor-actions generate
-```
-
-Generation requires the generator's documented validation tools, including Mise.
-Keep the generated files together with the changed input.
-Do not patch a generated workflow to repair a generator defect.
-The repository owns `.github/PULL_REQUEST_TEMPLATE.md`.
-The generator preserves that template.
-
-For a generation comparison, use a fresh temporary directory:
+Compare the generated files with a fresh preview.
 
 ```sh
-vitalik_preview="$(mktemp -d)"
-velnor-actions generate --output-dir "$vitalik_preview"
-diff -r .github "$vitalik_preview/.github"
+package_preview="$(mktemp -d)"
+velnor-actions generate --output-dir "$package_preview"
+diff -r --brief .github "$package_preview/.github"
 ```
 
-Expected result: no generated-file differences.
-The preview does not change the package.
+An empty diff confirms the recorded generator can reproduce the files.
 
 ## Review evidence
 
@@ -310,16 +273,27 @@ No external provider model or production operation ran in these exercises.
 
 ## Release
 
-1. Update the version in the portable manifest.
-2. Update the two host manifests to the same version.
-3. Describe the change in `CHANGELOG.md`.
-4. Run the local verification commands.
-5. Regenerate CI if its inputs changed.
-6. Publish the release commit and its `vVERSION` tag.
-7. Record that exact revision in the central marketplace catalog.
-8. Regenerate all native catalogs in the marketplace.
-9. Verify the published tag, revision, and catalog entry.
+Update the version and description in `plugin.json` when the release requires
+it. Use the central generator to sync equivalent host metadata and the shared
+files. From the catalog checkout, point the generator at the directory that
+contains the plugin checkouts.
 
-Use the actual release version in place of `VERSION`.
-Do not publish a catalog entry before its source and tag exist.
-The first release uses version `0.1.0` and tag `v0.1.0`.
+```sh
+python3 scripts/sync-packages.py --workspace /path/to/plugin-checkouts
+python3 scripts/sync-packages.py --workspace /path/to/plugin-checkouts --check
+```
+
+Review changes from `standards/native/` and `standards/models/model-routing.md`
+in the catalog checkout. Update `CHANGELOG.md`. Run the package checks and regenerate
+CI when its inputs change. Tag the verified release commit, publish it, and
+record its exact revision in the central catalog. Regenerate the central native
+catalogs after that revision is available. Check the published tag and catalog pin.
+Use [installation](installation.md) to migrate or remove an installed version.
+
+## Dependency lockfile
+
+Use Bun 1.4.4 for native dependency maintenance.
+Update the committed lockfile with `bun install --lockfile-only --ignore-scripts`.
+Verify it with `bun install --frozen-lockfile --lockfile-only --ignore-scripts`.
+Ship the lockfile with the complete native package.
+These checks do not run dependency lifecycle scripts.

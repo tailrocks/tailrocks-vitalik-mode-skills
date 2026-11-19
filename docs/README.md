@@ -1,14 +1,18 @@
 # Documentation
 
-| Guide | Purpose |
-| --- | --- |
-| [Installation](installation.md) | Install the package and select the skill on each agent. |
-| [Usage](usage.md) | Enable the mode, select a planner, and understand its result. |
-| [Engineering tradeoffs](research.md) | Examine the research, tactic choices, scenarios, and limits. |
-| [Planner model research](model-research.md) | Compare documented model controls and the scope of actual reviews. |
-| [Compatibility](compatibility.md) | Inspect documented capabilities and verification limits. |
-| [Maintenance](maintenance.md) | Validate, regenerate CI, and release the package. |
-| [Troubleshooting](troubleshooting.md) | Recover from invocation, model, state, and tracking problems. |
+## Guides
+
+- [Installation](installation.md) gives the native host routes.
+- [Usage](usage.md) shows how to select a skill and use its arguments.
+- [Runtime requirements](runtime.md) lists the tools and packaged resources.
+- [Package structure](architecture.md) explains file ownership.
+- [Model choices](models.md) explains role selection and effort.
+- [Compatibility](compatibility.md) records host behavior and limits.
+- [Verification](verification.md) lists package checks and observed evidence.
+- [Maintenance](maintenance.md) gives generator and release procedures.
+- [Troubleshooting](troubleshooting.md) helps diagnose installation or use.
+- [Engineering tradeoffs](research.md) records the design evidence.
+- [Model research](model-research.md) records the model research.
 
 The authoritative procedure is [vitalik-mode](../skills/vitalik-mode/SKILL.md).
 The package contains one skill with local references and templates.
