@@ -72,4 +72,4 @@ When the accepted target and behavior hold, stop tuning.
 ## Sources
 
 - [Brendan Gregg on active benchmarking](https://www.brendangregg.com/activebenchmarking.html)
-- [Gene Amdahl on limits to parallel speedup](https://doi.org/10.1145/1465482.1465560)
+- [Gene Amdahl on limits to parallel speedup](https://www.cs.cmu.edu/~18742/papers/Amdahl1967.pdf)
