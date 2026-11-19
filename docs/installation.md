@@ -1,6 +1,6 @@
 # Installation
 
-`tailrocks-vitalik-mode-skills` version `0.2.0` contains 1 skills.
+`tailrocks-vitalik-mode-skills` version `0.2.1` contains 1 skills.
 The package source is [tailrocks/tailrocks-vitalik-mode-skills][package].
 The [Tailrocks catalog][catalog] pins one upstream commit per package.
 
@@ -51,9 +51,11 @@ grok plugin marketplace add tailrocks/tailrocks-skills
 grok plugin install tailrocks-vitalik-mode-skills --trust
 ```
 
-`--trust` grants the plugin access to Grok's extension runtime. Review the
-source before installing. Use `/vitalik-mode` in the session. On a name
-collision, `grok inspect --json` reports the qualified `invocableAs` shortcut.
+Review the source before running the command.
+The example uses `--trust` to grant trust immediately and skip confirmation.
+The tested managed install enabled the
+plugin. Use `/vitalik-mode` in the session. On a name collision,
+`grok inspect --json` reports the qualified `invocableAs` shortcut.
 
 Use `grok plugin marketplace list` to find the registered marketplace name.
 Refresh that marketplace, then run `grok plugin update tailrocks-vitalik-mode-skills`.
@@ -149,9 +151,10 @@ The commands check out the selected commit and pass the local directory to
 `agy plugin install`. Antigravity's named marketplace installs address its
 official marketplace. Tailrocks uses the local package installer.
 
-Use `/vitalik-mode` in chat. Inspect `agy plugin list --json` for
-installed components. For a new pin, install the updated checkout. If the CLI
-reports an installed copy, uninstall it first, then repeat the install.
+Use `/vitalik-mode` in chat. Inspect `agy plugin list --json` for the
+enabled state, version, and installed skills. For a new pin, install the updated
+checkout. If the CLI reports an installed copy, uninstall it and repeat the
+install.
 Remove with `agy plugin uninstall tailrocks-vitalik-mode-skills`. [Antigravity plugins][agy]
 
 ## pi
