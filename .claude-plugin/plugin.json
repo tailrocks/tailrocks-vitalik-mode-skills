@@ -1,5 +1,0 @@
-{
-  "name": "tailrocks-vitalik-mode-skills",
-  "version": "0.2.2",
-  "description": "Legacy Vitalik mode package. Use Vitalik mode from tailrocks-agent-policy-skills. Activation requires an explicit user request."
-}
