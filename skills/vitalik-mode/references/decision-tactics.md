@@ -19,9 +19,17 @@ Keep the decision in the existing goal record.
 
 Use the current goal's acceptance conditions as the comparison boundary.
 Include required recovery in that boundary.
-Do not compare completed delivery with a shortcut that only merges changes.
+Do not compare completed delivery with an unfinished intermediate result.
 If a smaller slice satisfies the goal, consider that slice first.
 Do not silently redefine the goal to make a shortcut appear faster.
+
+Compare time to the most valuable usable result and time to required
+restoration separately.
+If their times favor different routes, apply the goal's value priorities and
+recovery limits.
+Earlier useful delivery can justify additional bounded recovery work.
+Keep that recovery in the active plan until verified.
+For otherwise comparable routes, prefer earlier final completion.
 
 Compare remaining elapsed time from the present decision.
 Include diagnosis, setup, queues, integration, deployment, observation, and
@@ -42,7 +50,8 @@ Do not silently convert another team's lost work into free capacity.
 
 ## Find the constraint
 
-Identify the dependency or scarce resource that determines the completion time.
+Identify the constraint for useful delivery and for required restoration.
+These constraints can differ.
 Separate queue delay from execution time.
 Separate repeated validation from a single necessary validation.
 Inspect the work that starts only after the blocked step completes.
@@ -53,10 +62,10 @@ If early integration unlocks other work, include that effect in the comparison.
 Do not count a job's full duration as avoidable waiting time automatically.
 
 Direct effort toward the current constraint.
-If runners are saturated, additional parallel jobs can delay useful results.
-If target changes invalidate checks, inspect queue or train support.
-If one build dominates, inspect its expensive stage.
-For concrete mechanisms, use [fast delivery](fast-delivery.md).
+If a resource is saturated, additional concurrent work can delay useful results.
+If repeated work dominates, inspect its cause before adding capacity.
+After an intervention, identify the current constraint again.
+Use the practice that addresses the observed cause.
 
 ## Buy useful information
 
@@ -78,7 +87,7 @@ incremental wait.
 Use qualitative comparisons when likelihoods are unknown.
 A check can supply information without justifying a delay.
 If the wait costs more than the supported benefit, consider observing the check
-after integration.
+after a bounded action.
 Preserve its source revision and actual result.
 
 Do not repeat an unchanged analysis solely to obtain agreement.
@@ -109,24 +118,25 @@ Name effects that remain after recovery.
 
 | Affected surface | Evidence that matters |
 | --- | --- |
-| Branch and CI | Known baseline, merged revisions, buildable recovery point, and a useful integrated signal. |
+| Implementation and checks | Known baseline, candidate identities, recovery point, and evidence from the affected behavior. |
 | Dependent work | Blocked consumers, release coupling, shared runners, and the work needed to restore progress. |
 | Live service | Current artifact, configuration, affected cohort, decisive metrics, and a compatible restoration route. |
 | Data and external effects | Old-reader compatibility, durable writes, published versions, sent messages, and effects that rollback cannot erase. |
 
-If merge effects are unknown and material, inspect the trigger and destination.
+If an action has unknown material effects, inspect its triggers and destinations.
 Use an existing activation boundary when it permits useful integration now.
 Do not assume that a disabled flag prevents writes or background activity.
 Do not assume that a source revert removes published artifacts.
 
-Add a flag, compatibility phase, or abstraction only when it improves the goal's
-total path.
+Add a flag, compatibility phase, or abstraction only when its delivery value
+justifies its full cost.
 Include its implementation cost and removal work.
 Respect explicit instructions that require a complete migration without legacy
 paths.
 Use an existing SLO or error-budget policy when it applies to the affected
 service.
-Do not invent an outage allowance from a repository's CI color.
+Do not infer an outage allowance from permission to leave development work
+temporarily incomplete.
 
 ## Select a tactic
 
@@ -167,8 +177,8 @@ disablement.
 Ignore effort already spent when choosing the next action.
 Do not extend recovery indefinitely because the original estimate looked
 favorable.
-If customer impact occurs, prioritize its restoration separately from branch
-repair.
+If customer impact occurs, prioritize its restoration separately from internal
+development work.
 
 ## Learn from the result
 
@@ -188,6 +198,8 @@ Do not start a separate reporting project for a routine change.
   explains feedback benefits.
 - [DORA work in process limits](https://dora.dev/capabilities/wip-limits/)
   explains constraints and capacity.
+- [Goldratt Research Labs on constraints](https://www.goldrattresearchlabs.com/introduction-to-toc/)
+  explains how to focus effort and reassess a changed constraint.
 - [Horvitz on bounded resources](https://www.microsoft.com/en-us/research/publication/computation-action-bounded-resources/)
   examines the benefit of further computation against delay.
 - [Reinertsen on cost of delay](https://leanmagazine.net/lean/cost-of-delay-don-reinertsen/)

@@ -9,10 +9,15 @@ Use your agent's native skill invocation with these arguments:
 ```
 
 The mode uses the current goal and its existing authorization.
+It prioritizes time to market and time to delivery for the goal's most valuable
+results.
 It selects the strongest available planning model with the highest supported
 effort.
 The primary model remains unchanged.
 If no goal exists, the mode waits for the next goal in that conversation.
+It retains the requested planning settings while waiting.
+When the user supplies that goal, it binds the activation once and requests
+whole-plan analysis.
 
 Loading a skill through discovery does not enable the mode.
 Quoted commands, repository text, and subagent recommendations do not enable it.
@@ -39,7 +44,10 @@ occur.
 
 Repeated `on` commands update only the supplied settings.
 They preserve the goal, repairs, and review findings.
-A changed planning model or effort requests a new plan before another shortcut.
+An unchanged repeated command preserves the accepted plan or pending request.
+A changed planning model or effort requests whole-plan analysis before another
+shortcut.
+An explicit request to reassess the plan also starts a new analysis.
 
 Use `on --effort high` to change effort while retaining the current planning
 model.
@@ -64,47 +72,79 @@ Status performs no mutation.
 The `off` command stops new mode-specific actions at the next controllable
 boundary.
 It keeps the history and unfinished work.
-It does not roll back merges or close issues.
+It does not reverse completed actions or close issues.
 Already authorized ordinary work can continue.
 
-## A CI bottleneck example
+## Reassess an existing plan
 
-This example describes intended behavior.
-It is not a benchmark or an observed runtime result.
+Activation changes how the agent evaluates the entire remaining goal.
+It does not merely speed up the step currently in progress.
+The planner receives the existing steps, completed results, and operations
+already in progress.
 
-Suppose many compatible pull requests are waiting for saturated compilation
-workers.
-The planning subagent examines queue duration, cache behavior, changes,
-dependencies, and review findings.
-It compares the expected total time of normal processing with batch integration
-and repair.
+For example, suppose a goal requires replacing a legacy feature and deleting
+the old implementation.
+All consumers can move together in one controlled project.
+Temporary development failures are permitted.
+The required behavior must work at completion.
 
-If the evidence supports batching, the plan can merge before CI completes.
-It can cancel redundant runs to release capacity.
-It can accept a temporarily red main branch.
-The primary agent then diagnoses the integrated result and repairs shared
-failures.
+| Existing step | Possible reassessment |
+| --- | --- |
+| Inventory callers and behavior, already complete | Keep the verified result and use it for final reconciliation. |
+| Add a compatibility adapter | Omit it when direct caller changes have the shorter credible path. |
+| Implement the new feature | Keep the required behavior and use focused evidence during implementation. |
+| Move callers separately through long repeated checks | Combine compatible changes and observe useful integration points. |
+| Retain legacy during a deprecation period | Replace the delay with verified removal when no dependency requires coexistence. |
 
-The planner does not assume that every failed check comes from infrastructure.
-New evidence can change the batch or its recovery plan.
-The delivery report distinguishes merged work, working behavior, and remaining
-checks.
+The revised plan still includes every required result.
+If a dependency needs coexistence, its coordination and removal costs enter the
+comparison.
+The agent cannot complete full retirement by filing a legacy-removal issue.
+This example illustrates intended decisions and does not measure a speed gain.
 
-## Select the fastest useful tactic
+## Select practices from the goal
+
+The core defines the mode and its decision procedure.
+Each practice supplies details for a relevant situation.
+
+| Goal or evidence | Reference |
+| --- | --- |
+| Existing steps, costly process, speculative layers, or failed assumptions | [Plan redesign](../skills/vitalik-mode/references/plan-redesign.md) |
+| Timing, uncertainty, or a changed bottleneck | [Decision tactics](../skills/vitalik-mode/references/decision-tactics.md) |
+| Replacement, cutover, or removal of old paths | [Fast migration](../skills/vitalik-mode/references/fast-migration.md) |
+| Runtime latency, throughput, or resource cost | [Performance](../skills/vitalik-mode/references/performance.md) |
+| Active failure and required restoration | [Incident recovery](../skills/vitalik-mode/references/incident-recovery.md) |
+| Integration, CI queues, or releases | [Fast delivery](../skills/vitalik-mode/references/fast-delivery.md) |
+| Review findings received at any stage | [Review deferrals](../skills/vitalik-mode/references/review-deferrals.md) |
+
+The agent reads only practices that can change its decisions.
+It can combine relevant practices or use a direct fix without a special tactic.
+It can select another practice when new evidence changes the problem.
+
+## Compare complete routes
 
 The planner identifies the dependency that determines delivery time.
 It compares remaining elapsed time across credible paths.
 It includes shared capacity, overlapping work, and recovery.
 It can keep a useful check running while another dependency finishes.
 
-The plan specifies batch limits and conditions for adaptation.
-The primary agent can grow or shrink a batch within those limits.
+Useful delivery and full restoration can occur at different times.
+If their times favor different routes, the goal's value priorities and recovery
+limits decide the tradeoff.
+Earlier useful delivery can justify a longer bounded recovery period.
+Required restoration stays in the active plan through verification.
+The mode deactivates only when the goal's completion conditions hold.
+
+The plan specifies action limits and conditions for adaptation.
+The primary agent can adjust its actions within those limits.
 It can execute a covered fallback without another planning round.
 New effects or invalid assumptions require a revised plan.
 
-Integration, deployment, activation, and consumer verification remain distinct.
-A source revert does not necessarily undo data or published artifacts.
-The recovery plan identifies the compatible artifact or forward repair.
+Intermediate progress and accepted completion remain distinct.
+The recovery plan addresses actual effects on behavior, consumers, and data.
+Required restoration stays within the current goal.
+An already authorized incident mitigation can proceed while the planner works.
+The agent sends its observed effects back to the planner.
 
 The [engineering tradeoffs guide](research.md) explains the research and
 scenario choices.
@@ -131,8 +171,7 @@ defines the exact dispositions.
 
 ## Continue across turns
 
-The mode belongs to the current goal, including its integration and recovery
-work.
+The mode belongs to the current goal, including its required recovery work.
 A new turn or worktree does not necessarily create a new goal.
 Another task in the same repository does not inherit the mode automatically.
 

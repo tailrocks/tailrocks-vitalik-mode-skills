@@ -1,11 +1,11 @@
 {
   "name": "tailrocks-vitalik-mode-skills",
   "version": "0.1.0",
-  "description": "Goal-scoped delivery mode with strong-model diagnosis, fast execution, temporary red CI, and tracked review deferrals.",
+  "description": "Engineering mode that prioritizes time to market with strong-model whole-plan analysis, contextual practices, and tracked recovery.",
   "skills": "./skills/",
   "interface": {
     "displayName": "Vitalik Mode",
-    "shortDescription": "Deliver faster with evidence and tracked follow-up.",
+    "shortDescription": "Reassess the whole plan and deliver the goal sooner.",
     "developerName": "tailrocks",
     "websiteURL": "https://github.com/tailrocks/tailrocks-vitalik-mode-skills"
   }

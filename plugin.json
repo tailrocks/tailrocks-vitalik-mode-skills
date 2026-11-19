@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "tailrocks-vitalik-mode-skills",
   "version": "0.1.0",
-  "description": "Goal-scoped delivery mode with strong-model diagnosis, fast execution, temporary red CI, and tracked review deferrals.",
+  "description": "Engineering mode that prioritizes time to market with strong-model whole-plan analysis, contextual practices, and tracked recovery.",
   "author": {
     "name": "tailrocks",
     "url": "https://github.com/tailrocks"

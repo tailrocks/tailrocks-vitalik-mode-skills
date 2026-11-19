@@ -1,6 +1,6 @@
 interface:
   display_name: "Vitalik Mode"
-  short_description: "Deliver faster with evidence and tracked follow-up"
-  default_prompt: "Use $vitalik-mode on for this goal. Select the strongest available planning subagent and keep the current main agent."
+  short_description: "Reassess the whole plan and deliver the goal sooner"
+  default_prompt: "Use $vitalik-mode on to reassess this goal with the strongest available planning subagent."
 policy:
   allow_implicit_invocation: false

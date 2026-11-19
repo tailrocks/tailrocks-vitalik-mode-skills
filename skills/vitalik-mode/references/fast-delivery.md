@@ -1,5 +1,14 @@
 # Fast delivery
 
+Use this practice for integration, CI, pull requests, and release bottlenecks.
+Within the goal's authority, consider administrator merges before normal CI
+completes.
+Accept temporary red main when planned integration and repair shorten delivery.
+Consider selective run cancellation or a manual release when the evidence
+supports that route.
+
+## Contents
+
 - [Find the delay](#find-the-delay)
 - [Choose a tactic](#choose-a-tactic)
 - [Diagnose CI evidence](#diagnose-ci-evidence)
@@ -42,7 +51,9 @@ Use the tactic that fits the observed delay and the current authority.
 | Intermittent results dominate | Run the cheapest controlled comparison that distinguishes a code regression from runner, environment, or test behavior. | Track a quarantine only when the plan justifies it, an alternate signal exists, and the task permits it. |
 | Compatible changes repeatedly pay a fixed CI cost | Compare an authorized admin batch with ordinary processing. Use focused checks on the combined result. | Record dependencies, expected red state, first observation, and recovery cost. |
 | Production exposure limits delivery | Use an existing flag, a representative canary, or an authorized release route that separates integration from exposure. | Confirm compatibility, observation criteria, and a usable stop or restore action. |
-| One large replacement blocks delivery | Ship an independently useful slice through an allowed interface, implementation, or routing seam. | Include temporary compatibility work and removal in the cost. Respect any required complete migration. |
+
+For a replacement or cutover, use [fast migration](fast-migration.md).
+Keep the full requested migration within its completion conditions.
 
 A queue can avoid serial stale-base retries.
 GitHub Actions workflows for queue-required checks need a `merge_group` trigger.
@@ -107,8 +118,8 @@ A sequential merge batch is not an atomic target update.
 If intermediate effects exceed authority, use a combined candidate or an
 authorized activation boundary.
 
-Use supported administrator merge operations within the repository's current
-authority.
+If the accepted plan calls for an administrator merge, use a supported operation
+within the current authority.
 Compare the current PR head with the reviewed head before each merge.
 Use an atomic expected-head condition when the interface supports it.
 Inspect the new head if that condition fails.
@@ -187,6 +198,12 @@ Verify actual recovery using the relevant branch check or consumer signal.
 
 ## Release and verify
 
+Evaluate release timing from actual exposure, observation, and available
+recovery capacity.
+Do not reject an authorized release solely because a weekday convention
+discourages it.
+If reduced support would delay repair, include that delay in the comparison.
+
 Use a custom or manual route when authorized publication and the time comparison
 favor it.
 Use evidence-supported estimates when measurements are unavailable.
@@ -211,27 +228,6 @@ Determine whether shared resources invalidate the comparison.
 Account separately for state changes that survive flag disablement or traffic
 rollback.
 
-Use branch by abstraction to switch local implementations at a shared seam.
-Use Strangler Fig when independent routes or capabilities can migrate to a
-replacement system.
-Add a flag or compatibility seam only when permitted and it reduces total
-delivery or recovery time.
-Track the temporary mechanism's removal and the condition that makes it safe.
-
-For an allowed staged migration, expand the interface or schema compatibly.
-Verify mixed versions before migrating data or consumers.
-Identify which implementation owns writes during a state transition.
-Verify data and traffic before contracting the old interface.
-Establish which previous artifact can operate against each state.
-Contract after the remaining consumers and rollback plan allow it.
-Use a direct verified cutover when the task requires complete replacement and
-temporary compatibility would violate that scope.
 [Google SRE on canarying](https://sre.google/workbook/canarying-releases/)
-
-[Branch By Abstraction](https://martinfowler.com/bliki/BranchByAbstraction.html)
-
-[Strangler Fig](https://martinfowler.com/bliki/StranglerFigApplication.html)
-
-[Parallel Change](https://martinfowler.com/bliki/ParallelChange.html)
 
 State the observed delivery outcome separately from pending checks and repairs.
