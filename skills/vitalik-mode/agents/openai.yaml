@@ -1,6 +1,0 @@
-interface:
-  display_name: "Vitalik Mode"
-  short_description: "Reassess the whole plan and deliver the goal sooner"
-  default_prompt: "Use $vitalik-mode on to reassess this goal with a capable planner at balanced reasoning effort."
-policy:
-  allow_implicit_invocation: false
