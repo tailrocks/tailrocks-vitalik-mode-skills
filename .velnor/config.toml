@@ -1,0 +1,10 @@
+schema = 1
+
+[workflow]
+default_branch = "main"
+
+[workflow.verify]
+jobs = ["alint", "strict-json", "frontmatter-id", "link-check"]
+
+[discovery]
+exclude = ["skills/**/templates/**"]
