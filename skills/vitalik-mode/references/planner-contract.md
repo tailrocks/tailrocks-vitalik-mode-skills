@@ -10,7 +10,8 @@
 ## Select the route
 
 Keep the primary model unchanged.
-Use the model and effort selected for planning.
+Use [planner settings](planner-settings.md) to resolve the requested model and
+effort.
 Inspect the host's current delegation schema or advertised model catalog.
 Do not infer model availability from a familiar name.
 Do not use skill frontmatter as proof that the runtime applied a model setting.
@@ -22,12 +23,13 @@ Do not install credentials, change providers, or rewrite global model settings
 to satisfy a selector.
 
 If the requested model is unavailable, report the unavailable selector.
-Offer the strongest available planning route.
+Offer a capable available planning route with appropriate cost and effort.
 Use it when existing user instructions authorize that fallback.
 Otherwise, keep the selected route pending while collecting useful evidence.
 If effort is unsupported, report its actual limit.
-For an observed model or explicit effort mismatch, seek an existing route that
-honors both selections.
+For an observed model or effort mismatch, seek an existing route that honors
+the resolved launch settings.
+Apply this rule when a host overrides economical default effort.
 Use that route when it is already available and authorized.
 Otherwise, apply the same fallback rule.
 Do not treat an unobservable setting as a known mismatch.

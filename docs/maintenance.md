@@ -272,6 +272,42 @@ These exercises inspect decisions under supplied evidence.
 They do not measure delivery gains or establish runtime support on other hosts.
 No live production operation or external model installation occurred.
 
+### Configurable planner defaults
+
+The 2026-11-20 configuration update replaced the automatic maximum-effort
+policy.
+Fresh activation selects a capable economical planner with balanced effort.
+The installed [planner settings](../skills/vitalik-mode/references/planner-settings.md)
+recognize all nine requested model products.
+Explicit model, native effort, and `highest` selections remain available.
+The `default` effort selector restores the economical policy.
+
+GPT-6.2 Astra and GPT-6.2 Sol reviewed this update at requested `ultra` effort.
+The host accepted those review settings.
+Both reviewers reported their material findings resolved.
+Their review settings do not define the skill's runtime default.
+
+Two fresh read-only threads exercised ten configuration scenarios.
+One used Sol at `ultra`, and the other used Astra at `ultra`.
+The prompts supplied task facts without expected answers.
+
+| Scenario | Observed behavior |
+| --- | --- |
+| C1: Fresh automatic selection with supplied cost estimates | Selected the capable economical route at explicit medium effort and retained the primary model. |
+| C2: Muse Wonder API defaults to max | Requested medium explicitly for the mode default. |
+| C3: Armed model change and later effort reset | Retained the requested effort until the first goal, then applied the explicit default reset. |
+| C4: Native Ultra carried to a Google route | Reported the unavailable pair, then applied a later explicit high selection through the documented mapping. |
+| C5: Nine named products with medium effort | Mapped all nine names to their supplied exact routes and native effort spellings. Reported actual execution as not run. |
+| C6: Automatic model with explicit Ultra | Selected a capable route supporting the requested native effort. |
+| C7: Repeated activation versus off and fresh on | Preserved the active goal's selectors, then applied economical defaults to the fresh activation. |
+| D1: One verified fixed-medium route and unknown prices | Accepted the balanced route and recorded the cost comparison as unknown. |
+| D2: Host overrides default medium with max | Retained the report as evidence and selected an authorized route that honored the resolved settings. |
+| D3: Armed and automatic selector continuity | Waited for a goal while armed and preserved automatic selection across an effort-only change. |
+
+These exercises examine instruction behavior under supplied host facts.
+They do not establish provider runtime compatibility or comparative prices.
+No external provider model or production operation ran in these exercises.
+
 ## Release
 
 1. Update the version in the portable manifest.

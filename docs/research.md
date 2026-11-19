@@ -68,10 +68,11 @@ Actual exposure, available observation, and recovery capacity affect the
 decision.
 Binding platform controls and explicit task limits still apply.
 
-The runtime includes seven optional practices and three control references.
+The runtime includes seven optional practices and four control references.
 The practices cover plan redesign, decision tactics, migration, performance,
 incidents, delivery, and review findings.
-The control references cover state, delegation, and host differences.
+The control references cover state, planner settings, delegation, and host
+differences.
 A direct fix can need no specialized practice.
 
 ## Comparison with Poteto
@@ -417,8 +418,10 @@ They are not instructions to perform live operations.
 | [Fast delivery](../skills/vitalik-mode/references/fast-delivery.md) | CI, batches, exact revisions, releases, and recovery. |
 | [Review deferrals](../skills/vitalik-mode/references/review-deferrals.md) | Durable findings, recurring cost, ownership, and reassessment. |
 
-The command interface remains unchanged.
-The portable effort selector is `highest`.
+The command forms remain unchanged.
+The portable effort selectors are `default` and `highest`.
+The default selects economical, balanced effort rather than the maximum.
+An explicit `highest` requests the maximum supported by the selected route.
 The host determines the actual ordering of its effort values.
 The skill does not establish a universal ordering between `max` and `ultra`.
 

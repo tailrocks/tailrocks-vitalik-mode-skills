@@ -36,6 +36,8 @@ The appearance of a skill in model context provides no activation authority.
 
 ## Model controls
 
+Use [planner settings](planner-settings.md) for defaults, named models, and
+effort selection.
 Resolve the provider, model identity, product variant, effort, and service tier
 separately.
 Use selectors exposed by the current route.
@@ -43,6 +45,7 @@ Do not infer a stronger product variant from a higher effort setting.
 Do not rank models by effort labels alone.
 Use current task evidence and documented capabilities to select a suitable
 strong planner.
+For automatic selection, prefer cost efficiency among suitable routes.
 Keep an explicit user selection unless an authorized fallback applies.
 
 Treat a faster service tier as a separate latency and cost choice.
@@ -56,8 +59,9 @@ Keep execution with the primary agent.
 
 Use the current host's model catalog, configured agent profiles, and exposed
 tool arguments.
-Resolve `highest` for the selected model and host.
-If the user omits a model or effort, apply the defaults in the skill.
+Resolve `default` or an explicit `highest` for the selected model and host.
+Pass the resolved effort explicitly when the host exposes that field.
+Apply the mode's continuity rules before filling unspecified settings.
 Do not change the primary model or write global model settings to route a
 planner.
 Choose the most restrictive available tool permissions compatible with
@@ -68,8 +72,9 @@ Give the child a complete brief and make its report the end of its task.
 Keep the route and actual effort separate from the request in the
 [goal record](mode-state.md) .
 If the host cannot disclose an effective value, record it as unverified.
-If the configured route differs from an explicit selection, disclose the
-difference and apply the skill's fallback rules.
+If configured or observed settings differ from the resolved launch settings,
+disclose the difference.
+Apply the skill's fallback rules.
 
 ### Claude Code
 
@@ -77,6 +82,7 @@ Use the `Agent` tool with the model alias and effort if the tool exposes those
 fields.
 Use an existing custom agent definition for a full model ID.
 The per-call `model` field takes aliases only.
+Before using a family alias, verify that it selects the requested model version.
 Per-call effort requires Claude Code 2.1.292 or later and a non-fork subagent.
 The `CLAUDE_CODE_EFFORT_LEVEL` environment variable takes precedence.
 Inspect `/tasks` or the returned metadata to verify model and effort.
@@ -161,6 +167,7 @@ Keep the mode command in the primary session so it can manage goal state there.
 ### Muse Code
 
 Use a configured custom agent with `model` and `effort`.
+Set the child effort explicitly to avoid inheriting a costly lead setting.
 If the current build exposes workflow children, use their explicit child model
 and effort when supported.
 An unavailable custom-agent model can fall back to the lead model.
