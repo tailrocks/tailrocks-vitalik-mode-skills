@@ -1,6 +1,6 @@
 # Compatibility and verification
 
-`tailrocks-vitalik-mode-skills` version `0.2.1` publishes 1 skills from
+`tailrocks-vitalik-mode-skills` version `0.2.2` publishes 1 skills from
 one `skills/<id>/SKILL.md` tree. Each skill keeps its references, scripts,
 and assets in the installed package.
 

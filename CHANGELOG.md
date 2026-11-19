@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.2 - 2026-11-20
+
+- Mark this package as the legacy source during consolidation into
+  `tailrocks-agent-policy-skills` version `0.5.0`.
+- Direct new installations and future changes to the consolidated package.
+- Disable automatic model invocation through native skill frontmatter as
+  well as the existing OpenAI and registrar policies.
+
 ## 0.2.1 - 2026-11-20
 
 - Enforce portable description characters and the shared 500-line skill limit.

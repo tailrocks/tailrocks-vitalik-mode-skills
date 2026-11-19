@@ -1,5 +1,9 @@
 # Maintenance rules
 
+This repository is the legacy source for Vitalik mode. Keep future procedure
+changes in `tailrocks-agent-policy-skills`. Retain this source for migration
+and existing pinned installations. Do not create a second development path.
+
 This package contains one instruction skill: `vitalik-mode`.
 Keep its procedure in `skills/vitalik-mode/SKILL.md`.
 Keep required resources inside that skill directory.
@@ -11,7 +15,8 @@ Start at [the package guide](docs/README.md).
 - Use `plugin.json` as the source of package identity and version.
 - Keep the Claude, Kimi, and Antigravity manifests and `package.json`
   consistent with that source.
-- Keep skill frontmatter limited to `name`, `description`, and `license`.
+- Keep skill frontmatter limited to `name`, `description`, `license`, and
+  `disable-model-invocation`. Set `disable-model-invocation: true`.
 - Keep explicit activation in the description and skill procedure.
 - Keep `policy.allow_implicit_invocation: false` in `agents/openai.yaml`.
   Keep the explicit-only flags in the generated registration entries.

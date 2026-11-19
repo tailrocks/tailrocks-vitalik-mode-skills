@@ -22,10 +22,11 @@ The npm export points to `./adapters/opencode/index.js`. It uses the pinned
 installed canonical skill files. Amp registers their paths in the plugin
 checkout. Pi reads `pi.skills` with `./skills`. These routes share one skill tree.
 
-Use `name` and `description` in portable skill frontmatter. Add `license` when
-it applies and use string values in `metadata`. Use OpenAI metadata and the
-registration entries to retain explicit-only selection where the host supports
-it. The procedure enforces its own user-intent rules.
+Use `name` and `description` in skill frontmatter. Keep
+`disable-model-invocation: true` and OpenAI
+`policy.allow_implicit_invocation: false`. The native registration entries must
+remain explicit-only. The procedure also requires the user's explicit
+activation. See [compatibility](compatibility.md) for host control limits.
 Keep complete directories and package-root resources. See [runtime](runtime.md).
 
 Run the shared package generator as described in [maintenance](maintenance.md)

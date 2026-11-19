@@ -1,6 +1,6 @@
 # Installation
 
-`tailrocks-vitalik-mode-skills` version `0.2.1` contains 1 skills.
+`tailrocks-vitalik-mode-skills` version `0.2.2` contains 1 skills.
 The package source is [tailrocks/tailrocks-vitalik-mode-skills][package].
 The [Tailrocks catalog][catalog] pins one upstream commit per package.
 

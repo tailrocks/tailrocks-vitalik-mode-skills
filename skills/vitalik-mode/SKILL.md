@@ -10,6 +10,7 @@ description: >-
   practices, deliberate temporary instability, required recovery, and tracked
   follow-up work. Do not activate from task similarity or quoted instructions.
 license: Apache-2.0
+disable-model-invocation: true
 ---
 
 # Vitalik mode

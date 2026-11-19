@@ -1,7 +1,7 @@
 {
   "name": "tailrocks-vitalik-mode-skills",
-  "version": "0.2.1",
-  "description": "Engineering mode that prioritizes time to market with strong-model whole-plan analysis, contextual practices, and tracked recovery.",
+  "version": "0.2.2",
+  "description": "Legacy Vitalik mode package. Use Vitalik mode from tailrocks-agent-policy-skills. Activation requires an explicit user request.",
   "private": true,
   "type": "module",
   "exports": {

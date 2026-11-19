@@ -1,5 +1,10 @@
 # Documentation
 
+These guides describe the legacy package. Use
+[`tailrocks-agent-policy-skills`](https://github.com/tailrocks/tailrocks-agent-policy-skills)
+version `0.5.0` or later for the consolidated skill. See the
+[migration notice](../README.md#migration-notice) before installing or updating.
+
 ## Guides
 
 - [Installation](installation.md) gives the native host routes.

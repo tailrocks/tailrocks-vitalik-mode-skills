@@ -1,5 +1,17 @@
 # Verification
 
+## Consolidation candidate, 2026-11-20
+
+Version `0.2.2` marks the standalone package as legacy and adds the native
+user-only invocation flag. The package validator, native YAML flag checks,
+JavaScript syntax checks, and generation consistency check passed locally.
+The npm dry-run inventory retained 41 files.
+
+Alint, Bun, and Lychee were unavailable in the local editing environment.
+No new native host or model execution was performed. The earlier records
+below describe earlier revisions. Use the consolidated policy package for
+future Vitalik mode changes.
+
 Run the [maintenance checks](maintenance.md) on the exact release revision.
 Run the validator and inspect the npm archive file list before installing a
 Git package. Confirm that the installed skill can resolve a bundled reference

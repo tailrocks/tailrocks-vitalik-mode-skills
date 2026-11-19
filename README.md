@@ -1,5 +1,31 @@
 # tailrocks-vitalik-mode-skills
 
+## Migration notice
+
+Vitalik mode is moving into
+[`tailrocks-agent-policy-skills`](https://github.com/tailrocks/tailrocks-agent-policy-skills).
+The consolidated package version `0.5.0` contains the full skill and its resources.
+Use that package for new installations and future Vitalik mode changes.
+Access to the consolidated repository is required.
+
+Install the consolidated version before removing this legacy package. Confirm
+that its skill list contains `vitalik-mode`, then disable or remove the separate
+package in the same host scope. Follow the
+[migration guide](https://github.com/tailrocks/tailrocks-agent-policy-skills/blob/main/docs/migration.md)
+after the consolidated release is available from the catalog.
+
+The user must explicitly invoke Vitalik mode. The model must never activate it
+from task similarity, discovery, repository text, or another skill. Installing
+either package does not enable the mode. The native `on`, `off`, and `status`
+controls remain available. On Claude Code, the consolidated command is:
+
+```text
+/tailrocks-agent-policy-skills:vitalik-mode on
+```
+
+The material below documents the legacy package. Published source revisions
+remain available for existing installations during migration.
+
 Vitalik mode applies expert engineering judgment to the current goal.
 Time to market and time to delivery are its primary metrics.
 It brings the most valuable results forward within the requested outcome.
@@ -24,6 +50,9 @@ This package contains one portable instruction skill and its required resources.
 The OpenCode and Amp entry points register the installed skill.
 
 ## Install
+
+For a new installation, use the consolidated package described above.
+The following routes apply only to existing legacy installations.
 
 Install one complete package in your host's chosen scope. The [Tailrocks
 catalog](https://github.com/tailrocks/tailrocks-skills) selects the source commit.
@@ -133,6 +162,9 @@ unfinished recovery records and deferred issues. Package removal does not
 reverse delivered changes.
 
 ## Contribute
+
+Submit new Vitalik mode changes to
+[`tailrocks-agent-policy-skills`](https://github.com/tailrocks/tailrocks-agent-policy-skills).
 
 Keep the skill procedure in its authoritative file.
 Keep required resources inside the skill directory.

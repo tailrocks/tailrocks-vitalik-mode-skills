@@ -2,6 +2,11 @@
 
 ## Package ownership
 
+Maintain future Vitalik mode behavior in `tailrocks-agent-policy-skills`.
+Keep this repository available for historical source and migration. Coordinate
+the catalog switch after the consolidated package change is merged and
+verified. Do not remove the old catalog entry before its replacement is ready.
+
 Maintain the procedure in [the skill](../skills/vitalik-mode/SKILL.md).
 Keep its references and assets with the skill. Keep activation and goal state
 in the authorized host context. The native OpenCode and Amp entries register
