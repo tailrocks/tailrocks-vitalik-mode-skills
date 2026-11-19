@@ -15,13 +15,15 @@ Apply the command and state rules in [SKILL.md](../SKILL.md).
 | Host | Explicit command or selection |
 | --- | --- |
 | Claude Code | `/vitalik-mode` for a standalone skill. `/tailrocks-vitalik-mode-skills:vitalik-mode` for the plugin. |
-| Codex | `$vitalik-mode` in the CLI. Select the installed skill in the composer on supported app surfaces. |
+| Codex | `$vitalik-mode` for a standalone skill. `$tailrocks-vitalik-mode-skills:vitalik-mode` for the plugin. Select the installed skill in the composer on supported app surfaces. |
 | Grok Build | `/vitalik-mode` or the qualified command shown in the picker. |
 | omp | `/skill:vitalik-mode`. |
 | pi | `/skill:vitalik-mode`. |
-| OpenCode | Explicitly request the `vitalik-mode` skill. Use `/vitalik-mode` if the user configured a command. |
+| OpenCode V2 | `@vitalik-mode` from the installed plugin. |
+| Amp | Ask Amp to load `tailrocks-vitalik-mode-skills:vitalik-mode`. |
+| Antigravity CLI | `/vitalik-mode`. |
 | Muse Code | `/vitalik-mode` or the shortcut shown in the picker. |
-| Kimi Code | `/skill:vitalik-mode`. |
+| Kimi Code | `/skill:tailrocks-vitalik-mode-skills:vitalik-mode` for the plugin. |
 | Other Agent Skills host | Select the installed `vitalik-mode` skill and pass the command as user text. |
 
 Interpret the user text after the command or skill selection as its arguments.

@@ -1,192 +1,200 @@
 # Installation
 
-The package is `tailrocks-vitalik-mode-skills`.
-The marketplace is
-[tailrocks/tailrocks-skills](https://github.com/tailrocks/tailrocks-skills) .
-The skill ID is `vitalik-mode`.
+`tailrocks-vitalik-mode-skills` version `0.2.0` contains 1 skills.
+The package source is [tailrocks/tailrocks-vitalik-mode-skills][package].
+The [Tailrocks catalog][catalog] pins one upstream commit per package.
 
-Install one copy for each host and scope.
-Choose the marketplace, a host's package manager, or a complete skill directory
-copy.
-Use the command shown in your host's picker if it qualifies the skill name.
-These procedures describe documented routes. See the
-[compatibility evidence](compatibility.md) .
+Install the complete package in one scope per host.
+Keep `skills/`, sibling skills, references, assets, and package-root scripts
+in their original locations. Relative links and script imports use that layout.
 
-## Copy a complete skill directory
+See [runtime requirements](runtime.md) before running a selected workflow.
 
-Clone the
-[package repository](https://github.com/tailrocks/tailrocks-vitalik-mode-skills)
-or use a local checkout.
-Keep the skill file, references, assets, and agent metadata together.
-If the destination exists, inspect it before replacing the installed files.
-
-This example copies the skill to a project that uses `.agents/skills`.
-Run it from the destination project.
-Set `package_dir` to an absolute path to your checkout.
-
-```sh
-package_dir=/absolute/path/to/tailrocks-vitalik-mode-skills
-mkdir -p .agents/skills
-cp -R "$package_dir/skills/vitalik-mode" .agents/skills/
-```
-
-For another host root, replace `.agents/skills` in both commands.
-Open a new session if the current session does not discover the skill.
-Run the host's form of `status` to inspect the mode without enabling it.
+Private packages require Git credentials with read access to the source.
+Hosted imports also require the host's GitHub connection to have access.
 
 ## Claude Code
 
-Run the marketplace commands in a terminal.
+Register the marketplace once, then install this package in user scope.
 
 ```sh
 claude plugin marketplace add tailrocks/tailrocks-skills
 claude plugin install tailrocks-vitalik-mode-skills@tailrocks --scope user
 ```
 
-Run `/tailrocks-vitalik-mode-skills:vitalik-mode status` in the session.
-For `/vitalik-mode status` , use a standalone copy in `.claude/skills/` or
-`~/.claude/skills/` .
-To make the standalone skill user-only in the host, set its `/skills` entry to
-`user-only` .
-[Claude Code marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
-· [Claude Code skills](https://code.claude.com/docs/en/skills)
+Use `/tailrocks-vitalik-mode-skills:vitalik-mode` in the session.
+Run `claude plugin list` to inspect the installation.
+
+Refresh with `claude plugin marketplace update tailrocks`, then run
+`claude plugin update tailrocks-vitalik-mode-skills@tailrocks`. Use `/reload-plugins` in the
+session. Remove with `claude plugin uninstall tailrocks-vitalik-mode-skills@tailrocks --scope user`.
+[Claude Code plugins][claude]
 
 ## Codex
-
-Run the marketplace commands in a terminal.
 
 ```sh
 codex plugin marketplace add tailrocks/tailrocks-skills
 codex plugin add tailrocks-vitalik-mode-skills@tailrocks
 ```
 
-In the CLI, use `/skills` or type `$` and select `vitalik-mode`.
-Pass `status` after the skill mention.
-In supported Codex app surfaces, select the skill with the composer's skill
-picker.
-For a standalone copy, use `.agents/skills/` or `~/.agents/skills/`.
-[Codex CLI](https://learn.chatgpt.com/docs/cli/reference) ·
-[Codex skills](https://learn.chatgpt.com/docs/build-skills)
+Use `$tailrocks-vitalik-mode-skills:vitalik-mode` in the CLI or pick the skill from `/skills`.
+Inspect installed entries with `codex plugin list --json`.
+
+Refresh with `codex plugin marketplace upgrade tailrocks` and repeat the
+qualified `plugin add` command. Open a new session after updating.
+Remove with `codex plugin remove tailrocks-vitalik-mode-skills@tailrocks`. [Codex CLI][codex]
 
 ## Grok Build
 
-Use xAI's Grok Build CLI.
-For a standalone install, copy the skill to `.grok/skills/` or `~/.grok/skills/`
-.
-The CLI also discovers `.agents/skills/` in supported scopes.
-Run `grok inspect --json` to find the advertised command.
-Run `/vitalik-mode status` or the qualified command displayed under
-`invocableAs` .
-If you prefer plugin installation, use the CLI's marketplace and plugin manager.
-[Grok Build skills](https://docs.x.ai/build/features/skills-plugins-marketplaces)
-· [Grok Build CLI](https://docs.x.ai/build/cli/reference)
-
-## omp
-
-Run the marketplace commands in a terminal.
-
 ```sh
-omp plugin marketplace add tailrocks/tailrocks-skills
-omp plugin install tailrocks-vitalik-mode-skills@tailrocks
+grok plugin marketplace add tailrocks/tailrocks-skills
+grok plugin install tailrocks-vitalik-mode-skills --trust
 ```
 
-For a standalone copy, use `.omp/skills/` or `~/.omp/agent/skills/`.
-The native skill command is `/skill:vitalik-mode status`.
-[omp marketplace](https://github.com/can1357/oh-my-pi/blob/main/docs/marketplace.md)
-· [omp skills](https://github.com/can1357/oh-my-pi/blob/main/docs/skills.md)
+`--trust` grants the plugin access to Grok's extension runtime. Review the
+source before installing. Use `/vitalik-mode` in the session. On a name
+collision, `grok inspect --json` reports the qualified `invocableAs` shortcut.
 
-## pi
-
-Install the package from Git in a terminal.
-
-```sh
-pi install git:github.com/tailrocks/tailrocks-vitalik-mode-skills
-```
-
-Pi reads its conventional `skills/` directory.
-For a standalone copy, use `.pi/skills/` , `~/.pi/agent/skills/` , or
-`.agents/skills/` .
-Run `/skill:vitalik-mode status`.
-
-For an optional `/vitalik-mode` alias, add `~/.pi/agent/prompts/vitalik-mode.md`
-under your control.
-Use this prompt template.
-
-```markdown
----
-description: Run a Vitalik mode command in this session.
----
-Read and apply the vitalik-mode skill. This is the user's explicit Vitalik mode command.
-Arguments: $ARGUMENTS
-```
-
-Use `/skill:vitalik-mode` when exact argument quoting matters.
-Pi reconstructs `$ARGUMENTS` in prompt templates from the parsed arguments.
-[Pi packages](https://docs.pi.dev/latest/packages) ·
-[Pi skills](https://docs.pi.dev/latest/skills) ·
-[Pi prompt templates](https://docs.pi.dev/latest/prompt-templates)
-
-## OpenCode
-
-Copy the skill to `.opencode/skills/` or `~/.config/opencode/skills/`.
-You can also use the host's `.agents/skills/` compatibility path.
-In the session, enter `Use the vitalik-mode skill and run its status command.`
-
-For an optional OpenCode V2 `/vitalik-mode` alias, put this file at
-`.opencode/commands/vitalik-mode.md` in a project you control.
-
-```markdown
----
-description: Run a Vitalik mode command in this session.
-subagent: false
----
-Load the vitalik-mode skill. This is the user's explicit Vitalik mode command.
-Arguments: $ARGUMENTS
-```
-
-Keep this command in the primary session.
-On V1, use explicit skill selection or the installed version's custom command
-format.
-[OpenCode skills](https://opencode.ai/docs/skills) ·
-[OpenCode commands](https://opencode.ai/docs/commands) ·
-[OpenCode migration](https://opencode.ai/docs/migrate-v1)
+Use `grok plugin marketplace list` to find the registered marketplace name.
+Refresh that marketplace, then run `grok plugin update tailrocks-vitalik-mode-skills`.
+Remove with `grok plugin uninstall tailrocks-vitalik-mode-skills`. [Grok plugins][grok]
 
 ## Muse Code
 
-Use Meta's `muse` CLI.
-To install from a local checkout, run the command in a terminal.
-
 ```sh
-muse skills install ./tailrocks-vitalik-mode-skills/skills/vitalik-mode --scope user
+muse plugins marketplace add tailrocks tailrocks/tailrocks-skills
+muse plugins install tailrocks-vitalik-mode-skills@tailrocks
 ```
 
-For a project copy, use `.agents/skills/` in a trusted workspace.
-Open the `/` picker and use the displayed shortcut with `status`.
-[Muse Code skills](https://dev.meta.ai/docs/muse-code/extending)
+The Git-backed catalog resolves external packages while building its local
+snapshot. Inspect skipped entries if the package is missing. Inspect installed
+skills with `muse skills list --source plugin`.
+
+Use `/vitalik-mode` or the qualified entry shown in the `/` picker.
+For a newer pin, refresh the snapshot, remove the installed copy, and repeat
+the install command.
+
+```sh
+muse plugins marketplace update tailrocks
+muse plugins remove tailrocks-vitalik-mode-skills
+```
+
+The `remove` command alone uninstalls this package. [Muse marketplaces][muse]
+
+## omp
+
+```sh
+omp plugin marketplace add tailrocks/tailrocks-skills
+omp plugin install tailrocks-vitalik-mode-skills@tailrocks --scope user
+```
+
+Use `/skill:vitalik-mode` with skill commands enabled. For a name
+collision, `omp skill list --json` reports the resolved name. The qualified
+form uses `/skill:<plugin-id>/<skill-id>`.
+
+Refresh with `omp plugin marketplace update tailrocks`, then run
+`omp plugin upgrade tailrocks-vitalik-mode-skills@tailrocks --scope user`. Remove with
+`omp plugin uninstall tailrocks-vitalik-mode-skills@tailrocks --scope user`. [omp plugins][omp]
+
+## Exact-revision commands
+
+Run the following commands from a checkout of the [Tailrocks catalog][catalog].
+Each prints shell commands for the selected host and current catalog commit.
+Review and run the printed commands in your terminal.
+
+The next four hosts install this package directly. Their Tailrocks routes
+require no marketplace registration. [Distribution guide][distribution]
+
+## OpenCode
+
+Use the OpenCode V2 package installer.
+
+```sh
+python3 scripts/install-command.py tailrocks-vitalik-mode-skills --agent opencode
+```
+
+The printed `opencode plugin add` command installs a pinned Git package.
+Its server adapter registers the bundled skills. Use `@vitalik-mode`.
+Inspect the configured target with `opencode plugin list`.
+
+For a new pin, remove the old target with `opencode plugin remove` followed
+by its configured package specifier. Run the newly printed install command.
+The same removal command uninstalls the package. [OpenCode plugins][opencode]
+
+## Amp
+
+```sh
+python3 scripts/install-command.py tailrocks-vitalik-mode-skills --agent amp
+```
+
+The commands place a complete pinned checkout in Amp's user plugin directory.
+For project scope, place the checkout under `.amp/plugins/tailrocks-vitalik-mode-skills/`.
+The root `index.js` registers each bundled skill with Amp.
+
+Ask Amp to load `tailrocks-vitalik-mode-skills:vitalik-mode` explicitly. Run
+`amp plugins list` to inspect loaded plugins. For updates, fetch the new
+catalog commit in that checkout and switch to it with `git checkout --detach`.
+
+To uninstall, move this package directory outside the scanned plugin root.
+Run `plugins: reload` from the command palette after either change.
+[Amp directory plugins][amp]
+
+## Antigravity
+
+```sh
+python3 scripts/install-command.py tailrocks-vitalik-mode-skills --agent antigravity
+```
+
+The commands check out the selected commit and pass the local directory to
+`agy plugin install`. Antigravity's named marketplace installs address its
+official marketplace. Tailrocks uses the local package installer.
+
+Use `/vitalik-mode` in chat. Inspect `agy plugin list --json` for
+installed components. For a new pin, install the updated checkout. If the CLI
+reports an installed copy, uninstall it first, then repeat the install.
+Remove with `agy plugin uninstall tailrocks-vitalik-mode-skills`. [Antigravity plugins][agy]
+
+## pi
+
+```sh
+python3 scripts/install-command.py tailrocks-vitalik-mode-skills --agent pi
+```
+
+The printed `pi install` command uses the Git source and full commit ID.
+Pi reads the package's `pi.skills` entry. Use `/skill:vitalik-mode` and
+inspect configured packages with `pi list`.
+
+Remove with `pi remove <installed-source>`, using the Git specifier from
+`pi list`. To update, remove that pin and install the newly printed source.
+Use `/reload` in the session. [Pi packages][pi]
 
 ## Kimi Code
 
-Run the following commands in the Kimi Code CLI session.
-Add the marketplace URL if you want to browse its catalog.
+Kimi also supports this package. Open the Tailrocks catalog from the CLI
+session and select `tailrocks-vitalik-mode-skills`. Its catalog entry points to the pinned
+commit. Reload the session after installing.
 
 ```text
 /plugins marketplace https://raw.githubusercontent.com/tailrocks/tailrocks-skills/main/.kimi-plugin/marketplace.json
-/plugins install https://github.com/tailrocks/tailrocks-vitalik-mode-skills
 /reload
 ```
 
-For a version pin, use the desired commit URL in `/plugins install`.
-For a standalone copy, use `.kimi-code/skills/` , `.agents/skills/` , or
-`~/.kimi-code/skills/` .
-Run `/skill:vitalik-mode status`.
-[Kimi Code plugins](https://www.kimi.com/code/docs/en/kimi-code-cli/customization/plugins)
-·
-[Kimi Code skills](https://www.kimi.com/code/docs/en/kimi-code-cli/customization/skills)
+Use `/skill:tailrocks-vitalik-mode-skills:vitalik-mode` for a bundled skill. Open the
+plugin manager to apply a catalog update. Remove with
+`/plugins remove tailrocks-vitalik-mode-skills`, then `/reload`. [Kimi plugins][kimi]
 
-## Other Agent Skills hosts
+See [compatibility and verification](compatibility.md) for measured results.
 
-Copy the complete skill directory to the host's documented skills root.
-Select `vitalik-mode` explicitly and pass `status`, `on`, or `off` as user text.
-Use [host adapters](../skills/vitalik-mode/references/host-adapters.md) to
-determine whether a separate planner route is available.
-[Agent Skills specification](https://agentskills.io/specification)
+[package]: https://github.com/tailrocks/tailrocks-vitalik-mode-skills
+[catalog]: https://github.com/tailrocks/tailrocks-skills
+[distribution]: https://github.com/tailrocks/tailrocks-skills/blob/main/docs/standards/distribution.md
+[claude]: https://code.claude.com/docs/en/discover-plugins
+[codex]: https://learn.chatgpt.com/docs/cli/reference
+[grok]: https://github.com/xai-org/grok-build/blob/main/crates/codegen/xai-grok-pager/docs/user-guide/09-plugins.md
+[muse]: https://meta-models.github.io/muse-code-sdk/1.4/guides/plugins/concepts/marketplaces-and-updates/
+[omp]: https://github.com/can1357/oh-my-pi/blob/main/docs/marketplace.md
+[opencode]: https://opencode.ai/docs/plugins/
+[amp]: https://ampcode.com/docs/customize/plugins
+[agy]: https://antigravity.google/docs/plugins
+[pi]: https://docs.pi.dev/latest/packages
+[kimi]: https://www.kimi.com/code/docs/en/kimi-code-cli/customization/plugins

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 - 2026-11-20
+
+- Documented pinned native installs across the Tailrocks hosts, including
+  OpenCode V2, Amp, Antigravity, omp, and pi.
+- Added shared model guidance, portable skill metadata, and native package
+  validation.
+- Aligned generated CI on Velnor Actions 0.1.80 with offline link and anchor
+  checks.
+- Kept the explicit activation policy and separate planner controls.
+
 ## 0.1.0 — 2026-11-19
 
 - Add explicit `on`, `off`, and `status` commands for Vitalik mode.

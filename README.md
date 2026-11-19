@@ -21,33 +21,35 @@ Valid review findings remain tracked when their implementation can wait.
 | [vitalik-mode](skills/vitalik-mode/SKILL.md) | Enable, inspect, or disable whole-plan reassessment and fast execution for the current goal. |
 
 This package contains one portable instruction skill and its required resources.
-It adds no background process, runtime hook, or executable skill wrapper.
+The OpenCode and Amp entry points register the installed skill.
 
 ## Install
 
-Use the `tailrocks` collection or copy the complete skill directory.
-Use the installation route documented for your agent.
+Install one complete package in your host's chosen scope. The [Tailrocks
+catalog](https://github.com/tailrocks/tailrocks-skills) selects the source commit.
+Use the route for your host.
 
-| Agent | Installation and invocation |
+| Host | Native install route |
 | --- | --- |
-| Claude Code | [Plugin or standalone skill](docs/installation.md#claude-code) |
-| Codex | [Plugin or native skill directory](docs/installation.md#codex) |
-| Grok Build | [Plugin or native skill directory](docs/installation.md#grok-build) |
-| omp | [Agent Skills discovery](docs/installation.md#omp) |
-| pi | [Agent Skills discovery](docs/installation.md#pi) |
-| OpenCode | [Native skill directory](docs/installation.md#opencode) |
-| Muse Code | [Plugin or native skill directory](docs/installation.md#muse-code) |
-| Kimi Code | [Plugin or native skill directory](docs/installation.md#kimi-code) |
+| Claude Code | [Marketplace plugin](docs/installation.md#claude-code) |
+| Codex | [Marketplace plugin](docs/installation.md#codex) |
+| Grok Build | [Marketplace plugin](docs/installation.md#grok-build) |
+| Muse Code | [Marketplace snapshot](docs/installation.md#muse-code) |
+| omp | [Marketplace plugin](docs/installation.md#omp) |
+| OpenCode V2 | [Git package](docs/installation.md#opencode) |
+| Amp | [Directory plugin](docs/installation.md#amp) |
+| Antigravity | [Local plugin installer](docs/installation.md#antigravity) |
+| pi | [Git package](docs/installation.md#pi) |
+| Kimi Code | [Marketplace manager](docs/installation.md#kimi-code) |
 
-After standalone installation on an agent with direct skill commands:
+Run these commands to install from the Claude Code marketplace.
 
-```text
-/vitalik-mode on "<available planning model>" --effort medium
+```sh
+claude plugin marketplace add tailrocks/tailrocks-skills
+claude plugin install tailrocks-vitalik-mode-skills@tailrocks --scope user
 ```
 
-Native prefixes differ between agents.
-For example, Codex uses `$vitalik-mode`, while pi uses `/skill:vitalik-mode`.
-The [installation guide](docs/installation.md) gives the supported forms.
+See [runtime requirements](docs/runtime.md) for tools and files the skills use.
 
 ## Use
 
@@ -71,7 +73,7 @@ Select a planning model and effort without changing the primary model:
 
 Use `highest` only when you want the route's highest supported effort.
 The [planner settings](skills/vitalik-mode/references/planner-settings.md)
-recognize all nine requested model products and describe their route limits.
+describe model selection, effort, and host limits.
 
 Inspect or disable it:
 
@@ -111,24 +113,24 @@ limits.
 
 ## Documentation
 
-- [Documentation index](docs/README.md)
+- [Package guide](docs/README.md)
 - [Installation](docs/installation.md)
 - [Usage](docs/usage.md)
-- [Engineering tradeoffs](docs/research.md)
-- [Current model research](docs/model-research.md)
-- [Compatibility and sources](docs/compatibility.md)
+- [Runtime requirements](docs/runtime.md)
+- [Model settings](docs/models.md)
+- [Compatibility and verification](docs/compatibility.md)
 - [Maintenance](docs/maintenance.md)
-- [Troubleshooting](docs/troubleshooting.md)
+- [Engineering tradeoffs](docs/research.md)
+- [Model research](docs/model-research.md)
 
 ## Update and remove
 
-Refresh the collection and update the installed package through your agent's
-plugin manager.
-For a copied skill, replace the complete installed skill directory with the
-selected version.
-Disable the mode before removing the package from an active goal.
-Retain unfinished repair records and deferred issues.
-Package removal does not reverse delivered changes.
+Use [the host's update and removal steps](docs/installation.md).
+For a pinned Git package, install the new catalog revision and use one copy in
+the chosen scope.
+Disable the mode before removing the package from an active goal. Retain
+unfinished recovery records and deferred issues. Package removal does not
+reverse delivered changes.
 
 ## Contribute
 
