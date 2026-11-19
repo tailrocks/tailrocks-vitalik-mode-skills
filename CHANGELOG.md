@@ -19,6 +19,13 @@
 - Add plan redesign, full migration, performance, and incident practices.
 - Preserve armed selectors, unchanged plans, and useful incident mitigation.
 - Compare Poteto's related principles with the mode's decision contract.
+- Count usable partial delivery while retaining the complete goal.
+- Continue independent authorized work during initial planning.
+- Include decision windows and evidence provenance in planning.
+- Reconcile mutable operation state after handoffs.
+- Distinguish model variants, effort, service tiers, and runtime substitutions.
+- Handle partial planner events and inherited analysis limits.
+- Correct pi child isolation and document current model research.
 
 This is the first release.
 No previous package requires migration.

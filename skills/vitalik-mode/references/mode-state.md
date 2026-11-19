@@ -119,6 +119,11 @@ For a planned worktree transfer, carry these locators into the destination
 handoff.
 
 Read the record before continuing mode-specific work.
+Before retrying or extending a consequential action, reconcile relevant mutable
+state with the record.
+Inspect whether a recorded pending operation completed during the handoff.
+Reuse immutable evidence and the accepted plan when the relevant conditions
+still match.
 Update it at meaningful transitions rather than after every command.
 Retain the latest plan, outstanding repairs, and finding destinations across
 compaction.

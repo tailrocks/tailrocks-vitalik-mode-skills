@@ -90,6 +90,8 @@ Use the [planner contract](references/planner-contract.md).
 Keep the planner read-only and stop it after its report.
 While it runs, continue independently authorized mitigation supported by current
 evidence.
+Start other independent authorized work when its effects preserve the pending
+choices.
 Report those actions and their effects to the planner.
 Keep new planner-dependent shortcuts pending until its result arrives.
 

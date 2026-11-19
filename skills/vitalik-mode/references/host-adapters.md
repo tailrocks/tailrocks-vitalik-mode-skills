@@ -4,6 +4,12 @@ Use this reference when the invocation syntax or planner route depends on the
 host.
 Apply the command and state rules in [SKILL.md](../SKILL.md).
 
+## Contents
+
+- [Invocation](#invocation)
+- [Model controls](#model-controls)
+- [Planner routing](#planner-routing)
+
 ## Invocation
 
 | Host | Explicit command or selection |
@@ -28,6 +34,24 @@ Honor exact model names that contain spaces.
 Use the current user invocation as evidence of intent.
 The appearance of a skill in model context provides no activation authority.
 
+## Model controls
+
+Resolve the provider, model identity, product variant, effort, and service tier
+separately.
+Use selectors exposed by the current route.
+Do not infer a stronger product variant from a higher effort setting.
+Do not rank models by effort labels alone.
+Use current task evidence and documented capabilities to select a suitable
+strong planner.
+Keep an explicit user selection unless an authorized fallback applies.
+
+Treat a faster service tier as a separate latency and cost choice.
+Use it only when the host supports it and existing authority covers its cost.
+Do not silently lower effort to obtain a faster reply.
+When effort changes delegation behavior, keep descendant analysis within the
+planner's evidence scope and decision window.
+Keep execution with the primary agent.
+
 ## Planner routing
 
 Use the current host's model catalog, configured agent profiles, and exposed
@@ -38,6 +62,8 @@ Do not change the primary model or write global model settings to route a
 planner.
 Choose the most restrictive available tool permissions compatible with
 diagnosis.
+Inspect inherited tools and extensions that can change shared state.
+Distinguish a read-only assignment from restrictions enforced by the host.
 Give the child a complete brief and make its report the end of its task.
 Keep the route and actual effort separate from the request in the
 [goal record](mode-state.md) .
@@ -65,8 +91,11 @@ Use a fresh child when the exposed interface requires it for model overrides.
 An existing custom agent can supply both settings.
 Custom agent settings take precedence over per-spawn values.
 Use a route that the current provider and host allow.
+Ultra can enable further delegation in supported hosts.
+Apply the planner assignment to every descendant.
 [Codex skills](https://learn.chatgpt.com/docs/build-skills) ·
 [Codex subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents)
+· [Codex models](https://learn.chatgpt.com/docs/models)
 
 ### Grok Build
 
@@ -104,10 +133,13 @@ route a separate child.
 When an authorized terminal route exists, a separate `pi` print process with
 `--model` can serve as the child.
 The model selector accepts `provider/id` and an optional `:<thinking>` suffix.
-Use `--no-session` and restrict tools to evidence collection, such as
-`--tools read,grep,find,ls` .
-Use a read-only tool surface and remove access to executable tools from the
-child configuration.
+For a built-in provider, use `--print --no-session --no-extensions`.
+Restrict evidence tools with `--tools read,grep,find,ls`.
+The tools option alone does not disable extensions or MCP tools.
+If a provider needs an extension, retain only the required trusted extension
+through an explicit `--extension` selector.
+Inspect the effective tools before using that route for read-only analysis.
+Use another authorized route if those tools exceed the assignment.
 Treat availability of the binary, credentials, and model as runtime facts.
 [pi skills](https://docs.pi.dev/latest/skills) ·
 [pi extensions](https://docs.pi.dev/latest/extensions) ·

@@ -39,6 +39,7 @@ Quote a model name that contains spaces.
 The agent records the requested and actual planner settings separately.
 If the host cannot confirm a setting, the record says `unverified`.
 If the requested route is unavailable, the agent reports that limit.
+An observed model or explicit effort mismatch uses the same fallback rules.
 It does not silently change the primary model or claim a review that did not
 occur.
 
@@ -144,7 +145,16 @@ Intermediate progress and accepted completion remain distinct.
 The recovery plan addresses actual effects on behavior, consumers, and data.
 Required restoration stays within the current goal.
 An already authorized incident mitigation can proceed while the planner works.
+Other independent authorized work can proceed when its effects preserve the
+choices still under analysis.
+This can include work required by every credible route.
 The agent sends its observed effects back to the planner.
+
+When a decision window matters, the planner receives its latest useful return
+time.
+The agent preserves the selected model and effort while limiting unrelated
+research.
+A timeout or partial host event does not establish a usable plan.
 
 The [engineering tradeoffs guide](research.md) explains the research and
 scenario choices.
@@ -180,6 +190,8 @@ record.
 The handoff includes the skill locator, record locator, and continuation
 instruction.
 Fresh agents must read that record before continuing shortcuts.
+Before retrying an operation, they inspect relevant state that could have
+changed during the handoff.
 The mode never changes globally applied repository instructions to keep itself
 active.
 

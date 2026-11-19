@@ -5,6 +5,7 @@
 | [Installation](installation.md) | Install the package and select the skill on each agent. |
 | [Usage](usage.md) | Enable the mode, select a planner, and understand its result. |
 | [Engineering tradeoffs](research.md) | Examine the research, tactic choices, scenarios, and limits. |
+| [Planner model research](model-research.md) | Compare documented model controls and the scope of actual reviews. |
 | [Compatibility](compatibility.md) | Inspect documented capabilities and verification limits. |
 | [Maintenance](maintenance.md) | Validate, regenerate CI, and release the package. |
 | [Troubleshooting](troubleshooting.md) | Recover from invocation, model, state, and tracking problems. |
