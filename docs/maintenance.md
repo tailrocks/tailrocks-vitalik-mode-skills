@@ -128,6 +128,53 @@ Static verification passed the package validator, skill validator, and all
 Generated CI matched a second generation without differences.
 These checks do not establish a successful installation on each supported host.
 
+### Research iteration
+
+The 2026-11-19 research iteration used the same two models at `ultra` effort.
+Both examined primary sources and the integrated revisions.
+The interface accepted each requested model and effort setting.
+The research added decision tactics and expanded the delivery reference.
+The command interface remains unchanged.
+
+The review corrected these problems:
+
+- Complete root-cause proof could delay an evidence-supported mitigation.
+- An informative check could become a prerequisite regardless of its delay.
+- A covered fallback could require an unnecessary new planning round.
+- A first manual release could require historical timings that did not exist.
+- A forward repair could require an unavailable known-good artifact.
+- A small immediate correction could lack a suitable finding disposition.
+- A sequential batch could expose an intermediate deployment before its final
+  checkpoint.
+- The worked example could count overlapping recovery twice.
+
+Four fresh planning threads used task-local evidence for eleven offline
+scenarios.
+Two threads used `gpt-6.2-astra` at `ultra`.
+Two threads used `gpt-6.2-sol` at `ultra`.
+The prompts supplied the skill, observations, scope, and planning identity.
+They did not supply expected decisions.
+The threads returned plans without changing repositories or live services.
+
+| Scenario | Observed planning behavior |
+| --- | --- |
+| A: Seven compatible PRs and a shared failure | Proposed a bounded batch and shared repair. Avoided multiplying overlapping queue waits. |
+| B: CI fits inside an independent export | Reported no elapsed-time gain from bypassing CI. Kept useful work in parallel. |
+| C: Cache miss and candidate-only failures | Distinguished compiler and concurrency evidence from cache behavior. Retained focused checks. |
+| D: Target changes during expected red-main recovery | Paused affected expansion and examined integrated compatibility. Preserved the pre-write recovery option. |
+| E: Sparse canary and incompatible stored values | Stopped the actual writer. Preserved a compatible reader and examined shared-service recovery. |
+| F: Review findings and tracker timeout | Retained pending issue content, active-tracking requirements, and ownership gaps. Kept recovery defects as immediate work. |
+| G: A costly informative test and cheap bounded repair | Proposed the authorized merges while retaining the useful remote signal. Qualified completion and timing claims. |
+| H: A covered alternative hypothesis and cheap correction | Used the existing fallback and immediate correction without another planner. Preserved revision and batch constraints. |
+| I: First manual release without a known-good artifact | Used qualified timing estimates and an exact artifact. Identified forward recovery and immutable residual effects. |
+| J: Every main update deploys outside authority | Prepared a combined draft and identified the actual completion blocker. |
+| K: Exactly one combined rollout is authorized | Proposed one verified squash update. Distinguished delivered content from the original PRs' open state. |
+
+These scenarios exercise decision behavior under supplied facts.
+They do not measure live delivery speed or prove general optimality.
+They do not establish native host installation or runtime model-routing support.
+The [research guide](research.md) records the sources and their limits.
+
 ## Release
 
 1. Update the version in the portable manifest.

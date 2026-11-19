@@ -1,5 +1,11 @@
 # Review deferrals
 
+- [Disposition](#disposition)
+- [Create durable follow-up](#create-durable-follow-up)
+- [Preserve the review conversation](#preserve-the-review-conversation)
+- [Tracking failure](#tracking-failure)
+- [Completion](#completion)
+
 ## Disposition
 
 Read the finding and its relevant code or evidence.
@@ -8,7 +14,7 @@ Use the current goal to decide timing.
 
 | Disposition | Meaning | Required record |
 | --- | --- | --- |
-| `fix-now` | The finding blocks the goal or invalidates the shortcut. | Source, fix, and observed result. |
+| `fix-now` | The finding blocks delivery, invalidates shortcut evidence, or defeats recovery. Immediate correction can also cost less overall than deferral. | Source, fix, and observed result. |
 | `deferred` | The finding is valid and aligned, with lower current priority. | Source, reason, and confirmed tracking link. |
 | `duplicate` | An existing item covers the same outcome. | Source, canonical item, and coverage explanation. |
 | `dismissed` | Evidence rejects the finding or it does not serve the target. | Source and specific rationale. |
@@ -21,6 +27,11 @@ Preserve that work through deferral when it remains useful.
 Do not treat a stale comment location as proof that the defect disappeared.
 If further diagnosis can change the plan, include the finding in the planner's
 next request.
+Promote a finding to `fix-now` when new evidence invalidates the shortcut or
+its recovery.
+Fix an in-scope finding now when correction and verification cost less than
+tracking, revisiting, and later correction.
+Do not expand the goal into unrelated cleanup.
 
 ## Create durable follow-up
 
@@ -51,9 +62,16 @@ Include these facts:
 - Its impact and alignment with the intended outcome.
 - Why current delivery takes priority.
 - The expected fix and observable acceptance criteria.
-- Dependencies and the condition for revisiting the work.
+- Recurring cost or exposure while the finding remains open.
+- Observed recurrence, or an explicit unknown.
+- Dependencies and an observable trigger for revisiting the work.
 - An owner when known, or an explicit unassigned state.
 
+Compare future recurring cost with the one-time cost of the fix.
+Set a review date or expiry only when meaningful and authorized.
+Use expiry to reassess the finding and its priority.
+Keep unresolved findings open after expiry.
+Describe the next action without promising unattended work.
 Do not invent an assignee, deadline, or commitment from another person.
 Confirm the issue URL and its stored content after creation.
 Require an active tracking destination for an unresolved deferred outcome.
@@ -87,5 +105,6 @@ Do not claim that an issue exists or promise unattended future work.
 
 Include a short finding table in the delivery report.
 Link each deferred or duplicate item to its durable destination.
+Surface unassigned follow-ups and their revisit triggers at handoff.
 Keep deferred issues open until their own acceptance criteria are met.
 Completing the current goal does not silently close the follow-up work.

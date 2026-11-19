@@ -17,6 +17,7 @@ license: Apache-2.0
 
 Deliver the current goal in the shortest credible total time.
 Include diagnosis, execution, integration, and recovery in that time.
+Include delays that the shortcut imposes on other work.
 Prefer speed over temporary branch stability when the evidence supports the
 tradeoff.
 Accept a red main branch during planned integration and repair.
@@ -44,6 +45,7 @@ Accept these command forms:
 ```
 
 Treat `highest` as the highest effort that the selected model and host expose.
+Resolve effort ordering from the host, not from labels such as `max` or `ultra`.
 Treat other model names and effort values as selectors to resolve, not shell
 code.
 With effort alone, use the current planning model or the strongest available
@@ -109,10 +111,15 @@ Request the contract in [planner instructions](references/planner-contract.md).
 Let the planner inspect relevant code, logs, changes, dependencies, and review
 findings.
 Keep the planner read-only.
-Require a cause supported by evidence or a clearly labeled hypothesis.
+Locate the bottleneck and the evidence behind the next action.
+Separate a supported cause from a hypothesis.
+Resolve a material unknown when the information justifies its added delay.
+Do not delay already authorized incident recovery for a complete root-cause
+analysis.
 Require an ordered execution plan with a recovery action and replanning
 triggers.
 Require a concise rationale, not private reasoning transcripts.
+Treat model agreement as analysis, not additional operational evidence.
 
 If native delegation is unavailable, use an available read-only external agent
 route.
@@ -125,10 +132,14 @@ evidence.
 
 ### 3. Choose the fastest credible path
 
-Compare the critical path of normal processing with the proposed shortcut.
+Compare remaining elapsed time to the same accepted outcome for each credible
+path.
+Identify the dependency that determines completion time.
+Count overlapping work once.
 Use observed timings where available.
 Label estimates and uncertainty.
 Avoid false precision and exhaustive planning that adds no decision value.
+For consequential choices, use [decision tactics](references/decision-tactics.md).
 
 Consider these actions within the authorized scope:
 
@@ -137,13 +148,27 @@ Consider these actions within the authorized scope:
 - Keep main red while the planned recovery work proceeds.
 - Cancel superseded or redundant GitHub Actions runs to release capacity.
 - Use a custom or manual release path when it shortens delivery.
+- Separate integration, deployment, and activation when that separation saves
+  time.
+- Deliver a smaller useful slice when it still meets the goal's acceptance
+  conditions.
 - Defer valid review findings that have lower current priority.
 
 Use these actions only when their causal explanation fits the observed problem.
 Do not call an unexplained failure a cache problem.
 Do not wait for green CI merely to satisfy the usual sequence.
-Keep checks that can materially change the decision or reduce expected recovery
-time.
+Keep checks whose decision or recovery value justifies their incremental cost.
+State what a decisive check's result changes.
+Move useful checks off the immediate path when their value does not justify
+waiting before action.
+Account for their shared runner cost.
+
+Identify effects on the branch, dependent work, published artifacts, live
+service, and persistent data.
+Describe recovery from those effects.
+Do not treat a Git revert as proof that external effects are reversible.
+Choose batch limits, observations, and fallback actions before increasing
+exposure.
 
 For batch integration, CI cancellation, or a red target branch, read
 [fast delivery](references/fast-delivery.md) .
@@ -158,6 +183,8 @@ Classify it as `fix-now` , `deferred` , `duplicate` , `dismissed` , or
 Give each disposition a reason tied to evidence and the goal.
 
 Fix findings that defeat the goal or invalidate the planned shortcut.
+Fix small in-scope findings when immediate correction costs less overall than
+deferral.
 Defer valid, aligned findings when immediate delivery has greater value.
 Create or reuse an issue for each distinct outcome.
 Use one grouped issue for closely related findings.
@@ -165,6 +192,7 @@ Use an epic with linked sub-issues when the work needs separate tracking.
 
 Preserve the source comment, impact, acceptance criteria, and reason for
 deferral.
+Record the recurring cost, revisit condition, and owner or ownership gap.
 Confirm that the issue exists before recording `deferred`.
 If issue creation fails, retain `tracking-pending` in the durable goal record.
 Retry tracking when access returns within the current work.
@@ -182,15 +210,20 @@ For grouping, duplicates, and issue content, read
 Execute the plan in the primary thread.
 Reuse the plan for routine steps and independent work that it already covers.
 Do not launch another planning round for each command or commit.
+Adapt batch size and recovery actions within the plan's stated conditions.
 
 After each meaningful batch, compare the result with the planner's assumptions.
-If new evidence invalidates those assumptions, stop extending the affected
+If new evidence exceeds the plan's conditions, stop extending the affected
 batch.
 Send the new evidence to the planning subagent.
 Update the plan before taking the next consequential shortcut.
+Continue unaffected work while the planner examines the changed evidence.
+Use an already covered recovery action when its trigger occurs.
 
 Treat expected breakage as active recovery work.
-Choose a forward fix or rollback according to the fastest credible recovery.
+Compare remaining forward repair with rollback or disablement.
+Exclude time already spent from that choice.
+Distinguish branch repair from restoration of the live service.
 Keep recovery ownership, the next action, and the next observation point
 explicit.
 Do not declare completion merely because the merges finished.
@@ -217,6 +250,8 @@ Their existence does not require unrelated backlog work before delivery.
 ## Result
 
 Report the delivered outcome and the time tradeoff.
+Separate observed delivery and recovery time from estimated counterfactual
+savings.
 Identify the requested planner, actual planner, and actual effort when
 observable.
 Report shortcuts, observed checks, pending checks, and remaining recovery work
@@ -232,6 +267,8 @@ Report tracking gaps and the final mode state.
 - The report identifies which planning route actually ran.
 - The primary agent executed the work without changing its model implicitly.
 - The delivered outcome satisfies the current goal's completion conditions.
+- The comparison concerns the actual bottleneck and the same accepted outcome.
+- Observed effects remain within the accepted scope or an updated plan.
 - Temporary breakage is repaired or explicitly retained in the agreed outcome.
 - Each relevant review finding has a disposition and a durable record.
 - Deferred findings have verified tracking links.
@@ -244,6 +281,8 @@ Report tracking gaps and the final mode state.
   continuity.
 - [Planner contract](references/planner-contract.md) : planning and replanning
   instructions.
+- [Decision tactics](references/decision-tactics.md) : critical paths,
+  reversibility, useful information, and stopping decisions.
 - [Fast delivery](references/fast-delivery.md) : CI bottlenecks, batches, and
   recovery.
 - [Review deferrals](references/review-deferrals.md) : issue tracking and
