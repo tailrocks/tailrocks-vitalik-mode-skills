@@ -289,3 +289,11 @@ CI when its inputs change. Tag the verified release commit, publish it, and
 record its exact revision in the central catalog. Regenerate the central native
 catalogs after that revision is available. Check the published tag and catalog pin.
 Use [installation](installation.md) to migrate or remove an installed version.
+
+## Dependency lockfile
+
+Use Bun 1.4.4 for native dependency maintenance.
+Update the committed lockfile with `bun install --lockfile-only --ignore-scripts`.
+Verify it with `bun install --frozen-lockfile --lockfile-only --ignore-scripts`.
+Ship the lockfile with the complete native package.
+These checks do not run dependency lifecycle scripts.
