@@ -26,6 +26,10 @@
 - Distinguish model variants, effort, service tiers, and runtime substitutions.
 - Handle partial planner events and inherited analysis limits.
 - Correct pi child isolation and document current model research.
+- Configure all nine requested planner models and their reasoning effort.
+- Use economical model selection and balanced effort for fresh activation.
+- Keep higher effort explicit and add `--effort default` for economical effort.
+- Preserve goal selectors independently from resolved and actual settings.
 
 This is the first release.
 No previous package requires migration.

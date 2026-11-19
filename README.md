@@ -42,7 +42,7 @@ Use the installation route documented for your agent.
 After standalone installation on an agent with direct skill commands:
 
 ```text
-/vitalik-mode on "<available planning model>" --effort highest
+/vitalik-mode on "<available planning model>" --effort medium
 ```
 
 Native prefixes differ between agents.
@@ -57,11 +57,21 @@ Enable the mode for the current goal:
 /vitalik-mode on
 ```
 
+The default selects a capable planner for cost efficiency.
+It uses `medium` effort or a documented balanced equivalent.
+The primary agent keeps its model.
+
 Select a planning model and effort without changing the primary model:
 
 ```text
-/vitalik-mode on "<available planning model>" --effort highest
+/vitalik-mode on "Fable 5.2" --effort high
+/vitalik-mode on gpt-6.2-astra --effort ultra
+/vitalik-mode on --effort default
 ```
+
+Use `highest` only when you want the route's highest supported effort.
+The [planner settings](skills/vitalik-mode/references/planner-settings.md)
+recognize all nine requested model products and describe their route limits.
 
 Inspect or disable it:
 

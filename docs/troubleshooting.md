@@ -25,6 +25,17 @@ Otherwise, select an available planner explicitly.
 The mode keeps new shortcuts pending while it collects useful evidence.
 It does not switch the primary model silently.
 
+## The planner uses too much effort
+
+Use `on --effort default` to restore economical effort with the retained model
+selector.
+Use an explicit native level when you want a specific setting.
+Inspect requested, resolved, and actual values in `status`.
+Inspect profile caps, environment overrides, and inherited child settings.
+The mode reports a known mismatch instead of calling it the requested setting.
+It does not change global provider settings to repair that mismatch.
+See [planner settings](../skills/vitalik-mode/references/planner-settings.md).
+
 ## The host has no subagent tool
 
 Use an available read-only external agent route when the host permits it.

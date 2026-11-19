@@ -11,8 +11,10 @@ Use your agent's native skill invocation with these arguments:
 The mode uses the current goal and its existing authorization.
 It prioritizes time to market and time to delivery for the goal's most valuable
 results.
-It selects the strongest available planning model with the highest supported
-effort.
+It selects a capable planning model for cost efficiency.
+Its economical effort policy selects `medium` or a documented balanced
+equivalent.
+The agent passes that setting explicitly when the route supports it.
 The primary model remains unchanged.
 If no goal exists, the mode waits for the next goal in that conversation.
 It retains the requested planning settings while waiting.
@@ -26,37 +28,71 @@ The user controls activation.
 ## Select another planning model
 
 ```text
-/vitalik-mode on "<model name>" --effort highest
+/vitalik-mode on "<model name>" --effort medium
 ```
 
 Replace the model name with one advertised by the current agent or configured
 provider.
-Use a host-supported effort value or the portable selector `highest`.
+Use a host-supported effort value or a portable selector.
+The `default` selector restores economical effort.
+The `highest` selector explicitly requests the route's highest supported level.
 Resolve the ordering from the host's current controls.
 Names such as `max` and `ultra` do not have a universal cross-host ordering.
 Quote a model name that contains spaces.
 
-The agent records the requested and actual planner settings separately.
+For example:
+
+```text
+/vitalik-mode on "Fable 5.2" --effort high
+/vitalik-mode on "Opus 5.5" --effort medium
+/vitalik-mode on gpt-6.2-astra --effort ultra
+/vitalik-mode on gpt-6.2-sol --effort high
+/vitalik-mode on "Gemini 4 Argon" --effort medium
+/vitalik-mode on "Gemini 4 Carbon" --effort high
+/vitalik-mode on "Gemini 4 Neon" --effort highest
+/vitalik-mode on "Muse Wonder" --effort medium
+/vitalik-mode on "Muse Wonder Full" --effort highest
+```
+
+These examples require an available route with the selected model and effort.
+The [model mapping](../skills/vitalik-mode/references/planner-settings.md)
+identifies the products and their host-dependent controls.
+
+The agent records requested, resolved, and actual planner settings separately.
 If the host cannot confirm a setting, the record says `unverified`.
 If the requested route is unavailable, the agent reports that limit.
-An observed model or explicit effort mismatch uses the same fallback rules.
+An observed model or effort mismatch uses the same fallback rules.
 It does not silently change the primary model or claim a review that did not
 occur.
 
 Repeated `on` commands update only the supplied settings.
+This rule also applies while the mode is armed for its first goal.
 They preserve the goal, repairs, and review findings.
 An unchanged repeated command preserves the accepted plan or pending request.
-A changed planning model or effort requests whole-plan analysis before another
-shortcut.
+For a bound enabled goal, changed selectors request whole-plan analysis before
+another shortcut.
+While armed, changed selectors wait for the user's first goal.
 An explicit request to reassess the plan also starts a new analysis.
 
-Use `on --effort high` to change effort while retaining the current planning
+Use `on --effort high` to change effort while retaining the model selector.
+An explicit model stays fixed.
+An automatic selector can resolve to another capable model at the requested
+effort.
+For a fresh activation, this form selects an economical capable model that
+supports the requested effort.
+Use `on --effort default` to restore economical effort with the retained model
+selector.
+For a model-only change, a retained portable effort resolves against the new
 model.
-For a new activation, this form selects the strongest available planning model.
+A retained native effort stays exact and can be unavailable on that model.
+An `off` followed by a fresh `on` starts with the new defaults.
+Ordinary continuation preserves the active goal's recorded selectors.
 Malformed arguments leave the existing mode unchanged.
 
-For the full routing contract, read the skill's
-[host adapters](../skills/vitalik-mode/references/host-adapters.md) .
+For configuration precedence, read
+[planner settings](../skills/vitalik-mode/references/planner-settings.md).
+For native delegation, read the
+[host adapters](../skills/vitalik-mode/references/host-adapters.md).
 
 ## Inspect and stop
 

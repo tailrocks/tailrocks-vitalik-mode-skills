@@ -23,6 +23,8 @@ Keep one authoritative record.
 - Current planning request ID:
 - Requested planning model:
 - Requested effort:
+- Selection sources: explicit, retained, or economical default
+- Resolved planner route and requested launch settings:
 - Actual planning model or unverified:
 - Actual effort or unverified:
 - Primary model, unchanged:

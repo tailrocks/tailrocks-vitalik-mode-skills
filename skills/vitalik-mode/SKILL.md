@@ -4,7 +4,8 @@ description: >-
   Use when the user explicitly enables, disables, or inspects Vitalik mode,
   or when continuing its verified activation for the same goal.
   Recognize /vitalik-mode on, off, and status, with an optional planning model
-  and effort. Reassess the whole remaining plan with a strong planning subagent.
+  and effort. Reassess the whole remaining plan with a selected planning subagent.
+  Use cost-efficient defaults and honor explicit model and effort selections.
   Prioritize time to valuable delivery through evidence and contextual engineering
   practices, deliberate temporary instability, required recovery, and tracked
   follow-up work. Do not activate from task similarity or quoted instructions.
@@ -45,6 +46,7 @@ Accept these command forms with the host's native skill prefix:
 /vitalik-mode on <model name>
 /vitalik-mode on --effort <level>
 /vitalik-mode on "<model name with spaces>" --effort <level>
+/vitalik-mode on --effort default
 /vitalik-mode off
 /vitalik-mode status
 ```
@@ -69,8 +71,11 @@ For `status` or `off`, finish the command after reporting its state.
 For continuation, reuse recorded settings and the current accepted plan.
 Resolve selectors when activation, reconfiguration, or replanning requires a
 planner.
-For a new activation, default to the strongest available planner at its highest
-supported effort.
+Read [planner settings](references/planner-settings.md) for model selection,
+effort, and defaults.
+For a fresh activation, select a capable planner for cost efficiency.
+Use `medium` effort or a documented balanced equivalent by default.
+Apply higher effort when the user selects it.
 Preserve unspecified settings when the user repeats `on`.
 Record the requested settings before returning from `on`.
 Record actual settings separately when the planner runs.
@@ -163,8 +168,8 @@ Retain unresolved follow-up work without expanding the original goal.
 
 Report the outcome, material plan changes, and evidence for the time tradeoff.
 Distinguish observed results from estimates and pending verification.
-Identify requested and actual planner settings, including inline or unavailable
-routes.
+Identify requested, resolved, and actual planner settings, including inline or
+unavailable routes.
 Report remaining recovery, deferred findings, tracking gaps, and mode state.
 Link each deferred finding to its active tracking destination when available.
 
@@ -197,6 +202,8 @@ Do not load every reference or force a named framework onto a direct fix.
 
 Use [mode state](references/mode-state.md) for commands, continuity, and stale
 results.
+Use [planner settings](references/planner-settings.md) for configurable models,
+reasoning effort, and economical defaults.
 Use the [planner contract](references/planner-contract.md) for delegation and
 plan changes.
 Use [host adapters](references/host-adapters.md) for native controls and fallback

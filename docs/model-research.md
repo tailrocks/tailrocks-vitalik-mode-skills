@@ -82,6 +82,10 @@ reviews.
 
 Resolve the planner from the current host's capabilities.
 Honor explicit model and effort selections that the host supports.
+For fresh activation, use the economical policies in
+[planner settings](../skills/vitalik-mode/references/planner-settings.md).
+Pass balanced effort explicitly instead of inheriting a potentially costly
+provider default.
 Use the host's capabilities and limits to resolve `highest` for that model.
 If the selected effort can delegate, apply the planner's read-only scope to
 each child.
