@@ -92,7 +92,7 @@ Measure useful cache hits and the cost of restore and upload.
 Limit shared production cache writes to trusted builders.
 [Bazel remote caching](https://bazel.build/remote/caching)
 
-[Google's flaky test experience](https://testing.googleblog.com/2016/05/flaky-tests-at-google-and-how-we.html?hl=de_AT)
+[Google SRE on test evidence](https://sre.google/sre-book/testing-reliability/)
 
 ## Inspect revisions and integrate
 
